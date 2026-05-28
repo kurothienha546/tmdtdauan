@@ -343,8 +343,8 @@ const Hero = () => {
 
         {/* Right: Product bottles */}
         <div style={{
-          display: "flex", alignItems: "flex-end", justifyContent: "center", gap: "1rem",
-          position: "relative", height: 380,
+          display: "flex", alignItems: "flex-end", justifyContent: "center", gap: "1.5rem", // Tăng gap lên 1.5rem cho thoáng
+          position: "relative", height: 500, // Tăng height container từ 380 -> 500
           opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(24px)",
           transition: "all 1s ease 0.4s",
         }}>
@@ -353,8 +353,11 @@ const Hero = () => {
             pointerEvents: "none" }} />
 
           {products.map((p, i) => {
-            const heights = [220, 270, 280, 240, 230];
-            const offsets = [20, 5, 0, 15, 10];
+            // Tăng scale chiều cao của các chai lên khoảng 1.4x
+            const heights = [300, 360, 380, 330, 310]; 
+            // Điều chỉnh lại độ lệch (offset) cho cân xứng với size mới
+            const offsets = [30, 10, 0, 25, 15]; 
+            
             return (
               <div key={p.label}
                 style={{
@@ -373,24 +376,15 @@ const Hero = () => {
                   style={{ width: "100%", height: "100%", objectFit: "contain", filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.15))" }} 
                 />
 
-                <div style={{ textAlign: "center", marginTop: 8,
+                <div style={{ textAlign: "center", marginTop: 12,
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: "0.78rem", fontWeight: 600, color: C.charcoal }}>
+                  fontSize: "0.85rem", fontWeight: 600, color: C.charcoal }}>
                   {p.emoji} {p.label}
                 </div>
               </div>
             );
           })}
         </div>
-      </div>
-
-      <div style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
-        animation: "bounce 2s ease-in-out infinite", opacity: 0.6 }}>
-        <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem",
-          color: C.muted, letterSpacing: "0.15em", textTransform: "uppercase" }}>Khám phá</span>
-        <ChevronDown size={16} color={C.brown} />
-      </div>
 
       <style>{`
         @keyframes floatBottle {
