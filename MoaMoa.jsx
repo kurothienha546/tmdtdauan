@@ -374,7 +374,7 @@ const Hero = () => {
       <div style={{ position: "absolute", top: "30%", left: "30%", width: "35vw", height: "35vw", background: "rgba(212, 163, 115, 0.15)", filter: "blur(90px)", borderRadius: "50%", animation: "blob-float-1 25s infinite ease-in-out 2s", pointerEvents: "none", zIndex: 0 }} />
 
       {/* Trust Badges */}
-      <div className="glass-badge desktop-only" style={{ position: "absolute", top: "25%", right: "12%", zIndex: 10, borderRadius: "20px", padding: "12px 18px", display: "flex", alignItems: "center", gap: "10px", animation: "badge-float 5s infinite ease-in-out", opacity: loaded ? 1 : 0, transition: "opacity 1s ease 0.8s" }}>
+      <div className="glass-badge desktop-only" style={{ position: "absolute", top: "25%", right: "20%", zIndex: 10, borderRadius: "20px", padding: "12px 18px", display: "flex", alignItems: "center", gap: "10px", animation: "badge-float 5s infinite ease-in-out", opacity: loaded ? 1 : 0, transition: "opacity 1s ease 0.8s" }}>
         <span style={{ fontSize: "1.4rem", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}>⭐</span>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", fontWeight: 700, color: "#2D2D2D" }}>4.9/5 Đánh giá</span>
