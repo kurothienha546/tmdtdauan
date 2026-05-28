@@ -786,24 +786,45 @@ function TimelineStep({ step, index, total }) {
   );
 }
 
+<<<<<<< HEAD
+function JourneyTimeline({ onNavigate = () => {} }) {
+=======
 function JourneyTimeline() {
+>>>>>>> 2177ce052498c42b8945fff6bf32bedcc2fd2ca8
   return (
     <section style={{ padding: "80px 24px 104px", background: `linear-gradient(175deg, ${T.bg} 0%, #EFE4D5 100%)`, position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "-120px", right: "-120px", width: "480px", height: "480px", borderRadius: "50%", background: "rgba(122,67,38,0.05)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "320px", height: "320px", borderRadius: "50%", background: "rgba(158,91,54,0.05)", pointerEvents: "none" }} />
       <FadeIn delay={0}><div style={{ textAlign: "center", marginBottom: "72px" }}><span style={{ fontFamily: T.bodyFont, fontSize: "10px", fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: T.accent, display: "block", marginBottom: "12px" }}>Hành trình của giọt dầu</span><h2 style={{ fontFamily: T.headingFont, fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, color: T.dark, margin: 0 }}>Ba bước chạm tới <em style={{ color: T.accent, fontStyle: "italic" }}>trái tim</em></h2><div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginTop: "20px" }}><div style={{ width: "48px", height: "1px", background: `linear-gradient(to right, transparent, ${T.muted})` }} /><div style={{ width: "6px", height: "6px", borderRadius: "50%", background: T.accent, opacity: 0.6 }} /><div style={{ width: "48px", height: "1px", background: `linear-gradient(to left, transparent, ${T.muted})` }} /></div></div></FadeIn>
       <div style={{ maxWidth: "900px", margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "40px 0", position: "relative" }}>{STEPS.map((step, i) => <TimelineStep key={step.id} step={step} index={i} total={STEPS.length} />)}</div>
+<<<<<<< HEAD
+      <FadeIn delay={0.3}><div style={{ textAlign: "center", marginTop: "72px" }}><button
+        onClick={() => {
+          onNavigate('home');
+          setTimeout(() => document.getElementById('collection-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+        }}
+        style={{ fontFamily: T.bodyFont, fontWeight: 600, fontSize: "0.875rem", letterSpacing: "1.5px", textTransform: "uppercase", color: T.white, background: `linear-gradient(135deg, ${T.accent} 0%, ${T.sub} 100%)`, border: "none", borderRadius: "40px", padding: "16px 48px", cursor: "pointer", boxShadow: `0 8px 28px rgba(122,67,38,0.35)`, transition: "transform 0.25s ease, box-shadow 0.25s ease" }} onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 14px 36px rgba(122,67,38,0.45)`; }} onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 8px 28px rgba(122,67,38,0.35)`; }}>Khám phá sản phẩm</button><p style={{ fontFamily: T.bodyFont, fontSize: "0.78rem", color: "#9A7B6A", marginTop: "16px", letterSpacing: "0.2px" }}>100% tự nhiên · Không phụ gia · Ép lạnh nguyên bản</p></div></FadeIn>
+=======
       <FadeIn delay={0.3}><div style={{ textAlign: "center", marginTop: "72px" }}><button style={{ fontFamily: T.bodyFont, fontWeight: 600, fontSize: "0.875rem", letterSpacing: "1.5px", textTransform: "uppercase", color: T.white, background: `linear-gradient(135deg, ${T.accent} 0%, ${T.sub} 100%)`, border: "none", borderRadius: "40px", padding: "16px 48px", cursor: "pointer", boxShadow: `0 8px 28px rgba(122,67,38,0.35)`, transition: "transform 0.25s ease, box-shadow 0.25s ease" }} onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 14px 36px rgba(122,67,38,0.45)`; }} onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = `0 8px 28px rgba(122,67,38,0.35)`; }}>Khám phá sản phẩm</button><p style={{ fontFamily: T.bodyFont, fontSize: "0.78rem", color: "#9A7B6A", marginTop: "16px", letterSpacing: "0.2px" }}>100% tự nhiên · Không phụ gia · Ép lạnh nguyên bản</p></div></FadeIn>
+>>>>>>> 2177ce052498c42b8945fff6bf32bedcc2fd2ca8
     </section>
   );
 }
 
+<<<<<<< HEAD
+const StoryPage = ({ onNavigate = () => {} }) => {
+=======
 const StoryPage = () => {
+>>>>>>> 2177ce052498c42b8945fff6bf32bedcc2fd2ca8
   return (
     <main style={{ background: T.bg, minHeight: "100vh", fontFamily: T.bodyFont, color: T.dark, overflowX: "hidden" }}>
       <HeroBanner />
       <PhilosophySection />
+<<<<<<< HEAD
+      <JourneyTimeline onNavigate={onNavigate} />
+=======
       <JourneyTimeline />
+>>>>>>> 2177ce052498c42b8945fff6bf32bedcc2fd2ca8
     </main>
   );
 };
@@ -1493,7 +1514,11 @@ export default function MoaMoa() {
               </>
             )}
 
+<<<<<<< HEAD
+            {currentPage === "story" && <StoryPage onNavigate={(page) => setCurrentPage(page)} />}
+=======
             {currentPage === "story" && <StoryPage />}
+>>>>>>> 2177ce052498c42b8945fff6bf32bedcc2fd2ca8
 
             {currentPage === "shop" && (
               <div style={{ padding: "100px 20px", textAlign: "center", minHeight: "60vh" }}>
