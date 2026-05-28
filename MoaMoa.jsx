@@ -290,7 +290,7 @@ const Hero = () => {
             opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(20px)",
             transition: "all 0.8s ease 0.2s",
           }}>
-            MoaMoa - <br />
+            MoaMoa <br />
             Giọt dầu cho <em style={{ color: C.brown, fontStyle: "italic" }}>bấc lửa</em>
             <br />yêu thương
           </h1>
