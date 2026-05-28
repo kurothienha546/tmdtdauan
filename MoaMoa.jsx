@@ -341,7 +341,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right: Product bottles */}
+{/* Right: Product bottles */}
         <div style={{
           display: "flex", alignItems: "flex-end", justifyContent: "center", gap: "1.5rem", // Tăng gap lên 1.5rem cho thoáng
           position: "relative", height: 500, // Tăng height container từ 380 -> 500
@@ -385,20 +385,6 @@ const Hero = () => {
             );
           })}
         </div>
-
-      <style>{`
-        @keyframes floatBottle {
-          from { transform: translateY(var(--from, 0px)); }
-          to { transform: translateY(var(--to, -10px)); }
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(6px); }
-        }
-      `}</style>
-    </section>
-  );
-};
 
 /* ─── BUTTON COMPONENT ───────────────────────────── */
 const HoverButton = ({ children, primary = false, small = false, terra = false, onClick }) => {
