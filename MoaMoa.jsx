@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
-  ShoppingCart, Search, User, Star, ChevronRight, Heart,
+  ShoppingCart, User, Star, ChevronRight, Heart,
   Leaf, ArrowRight, Check, Shield,
   Instagram, Facebook, Youtube, Mail, Phone, MapPin,
-  Baby, Sparkles, FlaskConical, ChevronDown, Menu, X, Plus, Minus
+  Baby, Sparkles, FlaskConical, ChevronDown, Menu, X, Plus, Minus, MessageCircle
 } from "lucide-react";
 
 /* ─── DESIGN TOKENS ─────────────────────────────── */
@@ -198,12 +198,12 @@ const Navbar = ({ cartCount = 0, onNavigate = () => { }, onOpenCart = () => { },
 
         {/* Icons */}
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          <button type="button" className="icon-btn" style={{
+          <button type="button" onClick={() => window.location.href = 'tel:18006868'} className="icon-btn" style={{
             background: "none", border: "none", cursor: "pointer",
             padding: 8, borderRadius: 8, color: C.charcoal,
             transition: "background 0.2s, color 0.2s"
-          }}>
-            <Search size={18} strokeWidth={1.5} />
+          }} title="Gọi Hotline tư vấn">
+            <Phone size={18} strokeWidth={1.5} />
           </button>
           <button type="button" onClick={onOpenLogin} className="icon-btn" style={{
             background: "none", border: "none", cursor: "pointer",
@@ -284,17 +284,19 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
 
   const products = [
-    { id: "sp_gac", label: "Gấc", image: "/daugac.png", emoji: "🍊", color: "#E05A3D", price: 189000 },
-    { id: "sp_olive", label: "Olive", image: "/dauolive.png", emoji: "🫒", color: "#708C3A", price: 245000 },
-    { id: "sp_gao", label: "Gạo", image: "/daugao.png", emoji: "🌾", color: "#D4A373", price: 175000 },
-    { id: "sp_bo", label: "Bơ", image: "/daubo.png", emoji: "🥑", color: "#4A7C2F", price: 210000 },
-    { id: "sp_me", label: "Mè", image: "/daume.png", emoji: "🌱", color: "#2D2D2D", price: 165000 },
+    { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png",  emoji: "🍊", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png",emoji: "🫒", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png",  emoji: "🌾", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png",   emoji: "🥑", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_me",    name: "Dầu Mè Đen Ép Lạnh",     label: "Mè",   image: "/daume.png",   emoji: "🌱", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
   ];
 
   const handleAddToCart = () => {
     const selectedProduct = products[activeIndex];
     onAddToCart(selectedProduct);
   };
+
+  const activeProduct = products[activeIndex];
 
   const BrandName = () => (
     <span style={{
@@ -324,51 +326,39 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           33% { transform: translate(-40px, 60px) scale(1.15); }
           66% { transform: translate(30px, -30px) scale(0.85); }
         }
-        @keyframes badge-float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-12px); }
-        }
         .glass-badge {
-          background: rgba(255, 255, 255, 0.65);
+          background: rgba(255,255,255,0.65);
           backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.8);
-          box-shadow: 0 8px 32px rgba(122, 67, 38, 0.08);
+          border: 1px solid rgba(255,255,255,0.8);
+          box-shadow: 0 8px 32px rgba(122,67,38,0.08);
           transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .glass-badge:hover {
           transform: translateY(-5px) !important;
-          box-shadow: 0 12px 40px rgba(122, 67, 38, 0.15);
+          box-shadow: 0 12px 40px rgba(122,67,38,0.15);
         }
-        .primary-btn {
-          transition: all 0.3s ease;
-        }
+        .primary-btn { transition: all 0.3s ease; }
         .primary-btn:hover {
           transform: translateY(-3px);
           background: #5D7530 !important;
-          box-shadow: 0 12px 28px rgba(122, 67, 38, 0.35) !important;
+          box-shadow: 0 12px 28px rgba(122,67,38,0.35) !important;
         }
-        .secondary-btn {
-          transition: all 0.3s ease;
-        }
+        .secondary-btn { transition: all 0.3s ease; }
         .secondary-btn:hover {
           transform: translateY(-3px);
-          background: rgba(122, 67, 38, 0.06) !important; /* Xám nhạt, viền giữ nguyên */
+          background: rgba(122,67,38,0.06) !important;
           border-color: #5D331D !important;
           color: #5D331D !important;
         }
-        .micro-tag {
-          transition: all 0.3s ease;
-        }
+        .micro-tag { transition: all 0.3s ease; }
         .micro-tag:hover {
           transform: translateY(-3px);
-          background: rgba(255, 255, 255, 0.9) !important;
-          box-shadow: 0 6px 16px rgba(122, 67, 38, 0.08);
+          background: rgba(255,255,255,0.9) !important;
+          box-shadow: 0 6px 16px rgba(122,67,38,0.08);
         }
-
-        /* RESPONSIVE HÌNH ẢNH & TEXT CHAI DẦU */
         .product-visual-group {
           position: relative;
-          height: 90%; /* Increased instead of using scale(1.1) */
+          height: 90%;
           transform: translateY(10px);
           display: flex;
           justify-content: center;
@@ -385,7 +375,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
         }
         @media (min-width: 769px) {
           .product-visual-group {
-            height: 115%; /* Physically increases size without magnifying children text */
+            height: 115%;
             transform: translateY(95px) translateX(15px);
           }
           .product-img {
@@ -401,17 +391,15 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
       `}</style>
 
       {/* Blobs */}
-      <div style={{ position: "absolute", top: "-15%", right: "-5%", width: "45vw", height: "45vw", background: "rgba(112, 140, 58, 0.15)", filter: "blur(100px)", borderRadius: "50%", animation: "blob-float-1 18s infinite ease-in-out", pointerEvents: "none", zIndex: 0 }} />
-      <div style={{ position: "absolute", bottom: "-10%", left: "-10%", width: "50vw", height: "50vw", background: "rgba(192, 74, 59, 0.12)", filter: "blur(120px)", borderRadius: "50%", animation: "blob-float-2 22s infinite ease-in-out reverse", pointerEvents: "none", zIndex: 0 }} />
-      <div style={{ position: "absolute", top: "30%", left: "30%", width: "35vw", height: "35vw", background: "rgba(212, 163, 115, 0.15)", filter: "blur(90px)", borderRadius: "50%", animation: "blob-float-1 25s infinite ease-in-out 2s", pointerEvents: "none", zIndex: 0 }} />
-
-      {/* Trust Badges - Now inside products.map */}
+      <div style={{ position: "absolute", top: "-15%", right: "-5%", width: "45vw", height: "45vw", background: "rgba(112,140,58,0.15)", filter: "blur(100px)", borderRadius: "50%", animation: "blob-float-1 18s infinite ease-in-out", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", bottom: "-10%", left: "-10%", width: "50vw", height: "50vw", background: "rgba(192,74,59,0.12)", filter: "blur(120px)", borderRadius: "50%", animation: "blob-float-2 22s infinite ease-in-out reverse", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", top: "30%", left: "30%", width: "35vw", height: "35vw", background: "rgba(212,163,115,0.15)", filter: "blur(90px)", borderRadius: "50%", animation: "blob-float-1 25s infinite ease-in-out 2s", pointerEvents: "none", zIndex: 0 }} />
 
       <div className="hero-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "4rem 1.5rem", alignItems: "center", width: "100%", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
 
-        {/* CỘT TRÁI: TEXT */}
+        {/* LEFT COL */}
         <div>
-          <div className="micro-tag" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 18px", borderRadius: 30, background: "rgba(255, 255, 255, 0.65)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.6)", marginBottom: "1.5rem", cursor: "default", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(12px)", transition: "all 0.7s ease 0.1s" }}>
+          <div className="micro-tag" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 18px", borderRadius: 30, background: "rgba(255,255,255,0.65)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.6)", marginBottom: "1.5rem", cursor: "default", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(12px)", transition: "all 0.7s ease 0.1s" }}>
             <Leaf size={14} color="#708C3A" strokeWidth={2.5} />
             <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#708C3A", letterSpacing: "0.1em", textTransform: "uppercase" }}>100% Tự nhiên · VietGAP</span>
           </div>
@@ -425,25 +413,36 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           </p>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(16px)", transition: "all 0.8s ease 0.5s" }}>
-            {/* Nút Primary gọi hàm Backend */}
             <button type="button" onClick={handleAddToCart} className="primary-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: "none", background: C.olive, color: "white", cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600, boxShadow: "0 8px 24px rgba(74,93,35,0.28)" }}>
               <Sparkles size={15} strokeWidth={2} />
-              Mua ngay - Dầu {products[activeIndex].label}
+              Mua ngay — {activeProduct.label} 500ml
             </button>
-            {/* Nút Secondary fix màu */}
-            <button
-              type="button"
-              onClick={() => onNavigate('story')}
-              className="secondary-btn"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: `1.5px solid ${C.olive}`, background: "transparent", color: C.olive, cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600 }}>
+            <button type="button" onClick={() => onNavigate('story')} className="secondary-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: `1.5px solid ${C.olive}`, background: "transparent", color: C.olive, cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600 }}>
               Câu chuyện MoaMoa
               <ChevronRight size={15} strokeWidth={2} />
             </button>
           </div>
 
-          <div style={{ display: "flex", gap: "1.2rem", marginTop: "2.5rem", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(12px)", transition: "all 0.8s ease 0.65s" }}>
+          {/* Dynamic Price badge */}
+          <div style={{ marginTop: "1.5rem", display: "inline-flex", alignItems: "center", gap: 8, opacity: loaded ? 1 : 0, transition: "all 0.8s ease 0.6s" }}>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.5rem", fontWeight: 700, color: C.terra }}>
+              {new Intl.NumberFormat('vi-VN').format(activeProduct.price)}₫
+            </span>
+            {activeProduct.originalPrice && (
+              <>
+                <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem", color: C.muted, textDecoration: "line-through" }}>
+                  {new Intl.NumberFormat('vi-VN').format(activeProduct.originalPrice)}₫
+                </span>
+                <span style={{ background: C.terraPale, border: `1px solid rgba(192,74,59,0.25)`, color: C.terra, fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", fontWeight: 700, padding: "3px 10px", borderRadius: 20 }}>
+                  -{activeProduct.discount}%
+                </span>
+              </>
+            )}
+          </div>
+
+          <div style={{ display: "flex", gap: "1.2rem", marginTop: "1.5rem", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(12px)", transition: "all 0.8s ease 0.65s" }}>
             {[{ icon: Baby, text: "Từ 6 tháng tuổi" }, { icon: Check, text: "Non-GMO" }].map(({ icon: Icon, text }) => (
-              <div key={text} className="micro-tag" style={{ display: "flex", alignItems: "center", gap: 8, cursor: "default", background: "rgba(255, 255, 255, 0.45)", padding: "6px 14px 6px 6px", borderRadius: 30, border: "1px solid rgba(255,255,255,0.6)", backdropFilter: "blur(4px)" }}>
+              <div key={text} className="micro-tag" style={{ display: "flex", alignItems: "center", gap: 8, cursor: "default", background: "rgba(255,255,255,0.45)", padding: "6px 14px 6px 6px", borderRadius: 30, border: "1px solid rgba(255,255,255,0.6)", backdropFilter: "blur(4px)" }}>
                 <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(122,67,38,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon size={14} color={C.olive} strokeWidth={2.5} />
                 </div>
@@ -453,18 +452,16 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           </div>
         </div>
 
-        {/* CỘT PHẢI: SẢN PHẨM */}
+        {/* RIGHT COL */}
         <div style={{ position: "relative", height: 500, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(24px)", transition: "all 1s ease 0.4s" }}>
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(122,67,38,0.08) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
           <div style={{ position: "relative", width: "100%", height: "100%", zIndex: 1 }}>
             {products.map((p, i) => (
               <div key={p.label} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", opacity: activeIndex === i ? 1 : 0, transform: activeIndex === i ? "translateX(0) scale(1)" : (i > activeIndex ? "translateX(40px) scale(0.95)" : "translateX(-40px) scale(0.95)"), transition: "all 0.6s cubic-bezier(0.25, 1, 0.5, 1)", pointerEvents: activeIndex === i ? "auto" : "none" }}>
-
                 <div className="product-visual-group" style={{ position: "relative" }}>
                   <img className="product-img" src={p.image} alt={p.label} />
                 </div>
-
                 <div className="product-name-label" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", fontWeight: 700, color: "#2D2D2D" }}>
                   {p.emoji} Dầu {p.label}
                 </div>
@@ -472,12 +469,13 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
             ))}
           </div>
 
+          {/* Dot nav */}
           <div style={{ position: "absolute", right: "25%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 10 }}>
             {products.map((p, i) => (
               <button key={i} onClick={() => setActiveIndex(i)} style={{ width: activeIndex === i ? 22 : 12, height: activeIndex === i ? 22 : 12, borderRadius: "50%", background: p.color, border: activeIndex === i ? `3px solid white` : "2px solid transparent", boxShadow: activeIndex === i ? `0 0 0 2px ${p.color}, 0 6px 12px rgba(0,0,0,0.15)` : "0 4px 8px rgba(0,0,0,0.1)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.25, 1, 0.5, 1)" }} title={p.label} />
             ))}
           </div>
-        </div>
+        </div>  
       </div>
 
       <div style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, animation: "bounce 2s ease-in-out infinite", opacity: 0.6, cursor: "pointer" }}>
@@ -736,7 +734,7 @@ function TextCard({ eyebrow, title, body, align = "left" }) {
 function PhilosophySection() {
   const rows = [
     { textLeft: true, eyebrow: "Nguyên liệu & Quy trình", title: "Từ nông trại đến bàn ăn an toàn", body: "Những vùng đất nông nghiệp truyền thống của Việt Nam giờ được nâng chuẩn VietGAP — không phân bón hóa học, không chất bảo quản. Từng hạt lanh, hạt óc chó, hạt gấc đều trải qua quy trình kiểm định nghiêm ngặt trước khi được ép lạnh 100%, giữ trọn enzyme sống và dưỡng chất quý từ thiên nhiên.", imgSrc: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80&auto=format&fit=crop", imgAlt: "Organic Vietnamese farm" },
-    { textLeft: false, eyebrow: "Tâm lý & Gắn kết", title: "Một hương vị, một cảm xúc", body: "Khoa học gắn kết cho thấy bữa ăn dặm không chỉ là dinh dưỡng — đó là khoảnh khắc hình thành cảm giác an toàn trong lòng bé. MoaMoa được tạo ra để trở thành người bạn đồng hành, giúp mỗi muỗng bột thêm thơm, mỗi bữa ăn thêm ấm, và mỗi khoảnh khắc cùng con trở nên thật sự đáng nhớ.", imgSrc: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=800&q=80&auto=format&fit=crop", imgAlt: "Mother and baby bonding" },
+    { textLeft: false, eyebrow: "Tâm lý & Gắn kết", title: "Một hương vị, một cảm xúc", body: "Khoa học gắn kết cho thấy bữa ăn dặm không chỉ là dinh dưỡng — đó là khoảnh khắc hình thành cảm giác an toàn trong lòng bé. MoaMoa được tạo ra để trở thành người bạn đồng hành, giúp mỗi muỗng bột thêm thơm, mỗi bữa ăn thêm ấm, và mỗi khoảnh khắc cùng con trở nên thật sự đáng nhớ.", imgSrc: "https://vitadairy.vn/s/images/truyen-thong/Tin%20t%E1%BB%A9c/calokid.jpg", imgAlt: "Mother and baby bonding" },
   ];
 
   return (
@@ -931,14 +929,14 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
               fontFamily: "'Montserrat', sans-serif", fontSize: "1.35rem",
               fontWeight: 700, color: C.terra, lineHeight: 1, letterSpacing: "-0.02em"
             }}>
-              {product.price}
+              {new Intl.NumberFormat('vi-VN').format(product.price)}₫
             </div>
             {product.originalPrice && (
               <div style={{
                 fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem",
                 color: C.mutedLight, textDecoration: "line-through", marginTop: 4
               }}>
-                {product.originalPrice}
+                {new Intl.NumberFormat('vi-VN').format(product.originalPrice)}₫
               </div>
             )}
           </div>
@@ -964,12 +962,14 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
 /* ─── PRODUCTS SECTION ───────────────────────────── */
 const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) => {
   const products = [
-    { name: "Dầu Gấc MoaMoa", category: "Dầu ăn dặm", image: "/daugac.png", tagline: "Nguồn Beta-carotene tự nhiên vượt trội, hỗ trợ thị lực", bg: "#FEF0EB", benefits: ["Beta-carotene", "Vitamin A", "Lycopene"], price: "189.000₫", stars: 5, reviews: 284, volume: "100ml", discount: null },
-    { name: "Dầu Olive Extra Virgin", category: "Dầu ăn dặm", image: "/dauolive.png", tagline: "Nhập khẩu Địa Trung Hải, giàu Omega-9 cho não bộ", bg: "#EFF6E8", benefits: ["Omega-9", "Polyphenols", "Vit E"], price: "245.000₫", stars: 5, reviews: 196, volume: "100ml", discount: 15, originalPrice: "288.000₫" },
-    { name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: "175.000₫", stars: 4, reviews: 312, volume: "100ml", discount: null },
-    { name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: "210.000₫", stars: 5, reviews: 156, volume: "100ml", discount: null },
-    { name: "Dầu Mè Đen Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: "165.000₫", stars: 4, reviews: 210, volume: "100ml", discount: 10, originalPrice: "185.000₫" },
-    { name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", image: "/daubo.png", tagline: "Dầu Bơ + Dầu Gạo — bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: "320.000₫", originalPrice: "390.000₫", stars: 5, reviews: 427, volume: "2×100ml", discount: 18, featured: true },
+    { id: "sp_gac", name: "Dầu Gấc MoaMoa", category: "Dầu ăn dặm", image: "/daugac.png", tagline: "Nguồn Beta-carotene tự nhiên vượt trội, hỗ trợ thị lực", bg: "#FEF0EB", benefits: ["Beta-carotene", "Vitamin A", "Lycopene"], price: 399000, stars: 5, reviews: 284, volume: "500ml" },
+    { id: "sp_olive", name: "Dầu Olive Extra Virgin", category: "Dầu ăn dặm", image: "/dauolive.png", tagline: "Nhập khẩu Địa Trung Hải, giàu Omega-9 cho não bộ", bg: "#EFF6E8", benefits: ["Omega-9", "Polyphenols", "Vit E"], price: 399000, stars: 5, reviews: 196, volume: "500ml", discount: 15, originalPrice: 470000 },
+    { id: "sp_gao", name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: 399000, stars: 4, reviews: 312, volume: "500ml" },
+    { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: 399000, stars: 5, reviews: 156, volume: "500ml" },
+    { id: "sp_me", name: "Dầu Mè Đen Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
+    { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", image: "/daubo.png", tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
+    { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", image: "/daugac.png", tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
+    { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", image: "/daume.png", tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
   ];
 
   return (
@@ -986,8 +986,8 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-          <HoverButton>
-            Xem toàn bộ sản phẩm <ArrowRight size={15} strokeWidth={2} />
+          <HoverButton onClick={() => alert("Mở popup / Chuyển hướng sang Zalo/Messenger...")}>
+            Chat với chuyên gia tư vấn <MessageCircle size={15} strokeWidth={2} style={{ marginLeft: 4 }} />
           </HoverButton>
         </div>
       </div>
@@ -1318,7 +1318,9 @@ const LoginModal = ({ isOpen, onClose }) => {
 };
 
 /* ─── SLIDE CART ───────────────────────────────── */
-const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, onRemoveItem = () => {} }) => {
+const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, onIncreaseQty = () => {}, onRemoveItem = () => {} }) => {
+  const [checkoutHov, setCheckoutHov] = useState(false);
+
   if (!isOpen) return null;
 
   const totalAmount = cartItems.reduce((sum, item) => {
@@ -1327,11 +1329,18 @@ const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, 
   }, 0);
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.35)", zIndex: 1000 }} onClick={onClose}>
-      <aside onClick={(e) => e.stopPropagation()} style={{ position: "absolute", top: 0, right: 0, width: "100%", maxWidth: 420, height: "100%", background: "#FFFDFB", boxShadow: "-12px 0 30px rgba(0,0,0,0.18)", padding: "1.25rem", overflowY: "auto", animation: "slideInRight 0.25s ease" }}>
+    <div
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.35)", zIndex: 1000 }}
+      onClick={onClose}
+    >
+      <aside
+        onClick={(e) => e.stopPropagation()}
+        style={{ position: "absolute", top: 0, right: 0, width: "100%", maxWidth: 420, height: "100%", background: "#FFFDFB", boxShadow: "-12px 0 30px rgba(0,0,0,0.18)", padding: "1.25rem", overflowY: "auto", animation: "slideInRight 0.25s ease" }}
+      >
+        {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
           <div>
-            <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem", color: C.brown, letterSpacing: "0.2em", textTransform: "uppercase" }}>Giỏ hàng</div>
+            <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem", color: C.olive, letterSpacing: "0.2em", textTransform: "uppercase" }}>Giỏ hàng</div>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", color: C.charcoal, marginTop: 4 }}>Sản phẩm đã chọn</h3>
           </div>
           <button type="button" onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", padding: 6 }}>
@@ -1339,35 +1348,121 @@ const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, 
           </button>
         </div>
 
+        {/* Items */}
         {cartItems.length === 0 ? (
-          <div style={{ padding: "2rem 0", color: C.muted, fontFamily: "'Montserrat', sans-serif", fontSize: "0.92rem", textAlign: "center" }}>Giỏ hàng đang trống. Hãy thêm một sản phẩm nhé.</div>
+          <div style={{ padding: "2rem 0", color: C.muted, fontFamily: "'Montserrat', sans-serif", fontSize: "0.92rem", textAlign: "center" }}>
+            Giỏ hàng đang trống. Hãy thêm một sản phẩm nhé.
+          </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
             {cartItems.map((item) => (
-              <article key={item.id || item.name} style={{ background: "white", borderRadius: 18, border: `1px solid ${C.border}`, padding: "0.9rem", display: "flex", gap: "0.75rem", alignItems: "center" }}>
-                <img src={item.image || "/daugac.png"} alt={item.name} style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 12, background: C.creamDark }} />
+              <article
+                key={item.id || item.name}
+                style={{ background: "white", borderRadius: 18, border: `1px solid ${C.border}`, padding: "0.9rem", display: "flex", gap: "0.75rem", alignItems: "center" }}
+              >
+                <img
+                  src={item.image || "/daugac.png"}
+                  alt={item.name}
+                  style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 12, background: C.creamDark }}
+                />
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 700, color: C.charcoal }}>{item.name || `Dầu ${item.label}`}</div>
-                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem", color: C.muted, marginTop: 2 }}>Giá: {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(String(item.price).replace(/[^\d]/g, "")) || 0)}</div>
+                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 700, color: C.charcoal }}>
+                    {item.name || `Dầu ${item.label}`}
+                  </div>
+                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem", color: C.muted, marginTop: 2 }}>
+                    {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(
+                      Number(String(item.price).replace(/[^\d]/g, "")) || 0
+                    )}
+                  </div>
+                  {item.volume && (
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", color: C.olive, marginTop: 2, fontWeight: 600 }}>
+                      {item.volume}
+                    </div>
+                  )}
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <button type="button" onClick={() => onDecreaseQty(item.id || item.name)} style={{ width: 28, height: 28, borderRadius: "50%", border: `1px solid ${C.border}`, background: "white", cursor: "pointer", color: C.charcoal, fontWeight: 700, lineHeight: 1 }}>−</button>
-                    <span style={{ minWidth: 22, textAlign: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: C.terra }}>x{item.qty || 1}</span>
+                    <button
+                      type="button"
+                      onClick={() => onDecreaseQty(item.id || item.name)}
+                      style={{ width: 28, height: 28, borderRadius: "50%", border: `1px solid ${C.border}`, background: "white", cursor: "pointer", color: C.charcoal, fontWeight: 700, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Minus size={12} strokeWidth={2.5} />
+                    </button>
+                    <span style={{ minWidth: 22, textAlign: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.85rem", fontWeight: 700, color: C.terra }}>
+                      x{item.qty || 1}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => onIncreaseQty(item)}
+                      style={{ width: 28, height: 28, borderRadius: "50%", border: `1px solid ${C.olive}`, background: C.olivePale, cursor: "pointer", color: C.olive, fontWeight: 700, lineHeight: 1, display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Plus size={12} strokeWidth={2.5} />
+                    </button>
                   </div>
-                  <button type="button" onClick={() => onRemoveItem(item.id || item.name)} style={{ border: "none", background: "transparent", color: C.muted, cursor: "pointer", fontSize: "0.85rem", padding: 0 }}>✕</button>
+                  <button
+                    type="button"
+                    onClick={() => onRemoveItem(item.id || item.name)}
+                    style={{ border: "none", background: "transparent", color: C.muted, cursor: "pointer", fontSize: "0.85rem", padding: 0, transition: "color 0.2s" }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = C.terra}
+                    onMouseLeave={(e) => e.currentTarget.style.color = C.muted}
+                  >
+                    ✕
+                  </button>
                 </div>
               </article>
             ))}
           </div>
         )}
 
+        {/* Footer */}
         <div style={{ marginTop: "1.5rem", borderTop: `1px solid ${C.border}`, paddingTop: "1rem" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.92rem", color: C.charcoal, marginBottom: 8 }}>
-            <span>Tổng tiền</span>
-            <strong style={{ color: C.terra }}>{new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(totalAmount)}</strong>
+          {/* Subtotal row */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", color: C.muted, marginBottom: 6 }}>
+            <span>{cartItems.reduce((t, i) => t + (i.qty || 1), 0)} sản phẩm</span>
+            <span>Freeship từ 500.000₫</span>
           </div>
-          <button type="button" style={{ width: "100%", padding: "12px 14px", borderRadius: 40, border: "none", background: C.brown, color: "white", fontFamily: "'Montserrat', sans-serif", fontWeight: 700, cursor: "pointer" }}>Thanh toán</button>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "0.96rem", color: C.charcoal, marginBottom: "1rem" }}>
+            <span style={{ fontWeight: 600 }}>Tổng tiền</span>
+            <strong style={{ color: C.terra, fontSize: "1.1rem" }}>
+              {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(totalAmount)}
+            </strong>
+          </div>
+
+          {/* ── ACTIVE CHECKOUT BUTTON ── */}
+          <button
+            type="button"
+            onClick={() => alert("Chuyển đến trang thanh toán...")}
+            onMouseEnter={() => setCheckoutHov(true)}
+            onMouseLeave={() => setCheckoutHov(false)}
+            style={{
+              width: "100%",
+              padding: "14px",
+              borderRadius: 40,
+              border: "none",
+              background: checkoutHov ? C.oliveMid : C.olive,
+              color: "white",
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              fontSize: "0.85rem",
+              letterSpacing: "0.06em",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              transition: "background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease",
+              transform: checkoutHov ? "translateY(-2px)" : "none",
+              boxShadow: checkoutHov ? "0 10px 28px rgba(74,93,35,0.35)" : "0 4px 14px rgba(74,93,35,0.2)",
+            }}
+          >
+            <ShoppingCart size={15} strokeWidth={2} />
+            Tiến hành thanh toán
+          </button>
+
+          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", color: C.mutedLight, textAlign: "center", marginTop: "0.75rem", lineHeight: 1.5 }}>
+            🔒 Thanh toán bảo mật · Đổi trả trong 7 ngày
+          </p>
         </div>
       </aside>
     </div>
@@ -1438,6 +1533,21 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
   const overlayRef = useRef(null);
   const closeTimerRef = useRef(null);
 
+  // Per-product nutritional data (keyed by product id)
+  const nutritionMap = {
+    sp_gac:          { energy: "900 kcal", fat: "100g", vitE: "28mg", vitA: "620µg", omega: "Omega-6: 36%" },
+    sp_olive:        { energy: "884 kcal", fat: "100g", vitE: "14mg", vitA: "—",     omega: "Omega-9: 73%" },
+    sp_gao:          { energy: "900 kcal", fat: "100g", vitE: "32mg", vitA: "—",     omega: "Omega-6: 38%" },
+    sp_bo:           { energy: "884 kcal", fat: "100g", vitE: "13mg", vitA: "—",     omega: "Omega-9: 63%" },
+    sp_me:           { energy: "898 kcal", fat: "100g", vitE: "1.4mg", vitA: "—",     omega: "Omega-6: 42%" },
+    combo_nao:       { energy: "892 kcal", fat: "100g", vitE: "22mg", vitA: "—",     omega: "Hỗn hợp DHA" },
+    combo_toan_dien: { energy: "892 kcal", fat: "100g", vitE: "21mg", vitA: "310µg", omega: "Omega-9+6" },
+    combo_de_khang:  { energy: "899 kcal", fat: "100g", vitE: "16mg", vitA: "—",     omega: "Omega-6: 40%" },
+  };
+  const nutrition = nutritionMap[product?.id] || {
+    energy: "900 kcal", fat: "100g", vitE: "12mg", vitA: "—", omega: "Đa dạng"
+  };
+
   useEffect(() => { injectQuickViewStyles(); }, []);
   useEffect(() => { if (product) { setQuantity(1); setImgLoaded(false); } }, [product?.id]);
   useEffect(() => {
@@ -1460,40 +1570,137 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
 
   const isVisible = animState === "open";
   const overlayAnim = isVisible ? "qv-overlay-in 0.28s ease forwards" : "qv-overlay-out 0.30s ease forwards";
-  const modalAnim = isVisible ? "qv-modal-in 0.38s cubic-bezier(0.22,1,0.36,1) forwards" : "qv-modal-out 0.28s ease forwards";
+  const modalAnim  = isVisible ? "qv-modal-in 0.38s cubic-bezier(0.22,1,0.36,1) forwards" : "qv-modal-out 0.28s ease forwards";
+
+  const nutritionRows = [
+    { label: "Năng lượng",     value: nutrition.energy },
+    { label: "Chất béo tổng",  value: nutrition.fat },
+    { label: "Vitamin E",      value: nutrition.vitE },
+    { label: "Vitamin A",      value: nutrition.vitA },
+    { label: "Axit béo chính", value: nutrition.omega },
+  ];
 
   return (
-    <div ref={overlayRef} onClick={handleOverlayClick} role="dialog" aria-modal="true" aria-label={`Quick view: ${product.name}`} style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.42)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", animation: overlayAnim }}>
+    <div
+      ref={overlayRef}
+      onClick={handleOverlayClick}
+      role="dialog" aria-modal="true" aria-label={`Quick view: ${product.name}`}
+      style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.42)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", animation: overlayAnim }}
+    >
       <div id="moamoa-qv-grid" style={{ width: "100%", maxWidth: "850px", maxHeight: "calc(100vh - 32px)", background: `linear-gradient(145deg, ${QV_T.white} 0%, ${QV_T.cream} 100%)`, borderRadius: "24px", boxShadow: "0 32px 80px rgba(45,27,18,0.22), 0 8px 24px rgba(45,27,18,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", border: "1px solid rgba(255,255,255,0.75)", overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", animation: modalAnim, position: "relative" }}>
+
+        {/* LEFT: product image */}
         <div style={{ background: product.bg || "#EFE4D5", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 32px", overflow: "hidden", minHeight: "360px" }}>
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 55%, rgba(255,255,255,0.30) 0%, transparent 70%)`, pointerEvents: "none" }} />
           <div style={{ position: "absolute", width: "220px", height: "220px", borderRadius: "50%", background: `radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 70%)`, animation: "qv-glow-pulse 3.5s ease-in-out infinite", pointerEvents: "none" }} />
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(122,67,38,0.06) 1px, transparent 1px)", backgroundSize: "22px 22px", pointerEvents: "none" }} />
-          <img src={product.image} alt={product.name} onLoad={() => setImgLoaded(true)} style={{ position: "relative", zIndex: 1, maxWidth: "240px", maxHeight: "280px", width: "100%", objectFit: "contain", opacity: imgLoaded ? 1 : 0, transform: imgLoaded ? "scale(1)" : "scale(0.92)", transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1)", filter: "drop-shadow(0 16px 32px rgba(45,27,18,0.22))" }} />
+          <img
+            src={product.image} alt={product.name}
+            onLoad={() => setImgLoaded(true)}
+            style={{ position: "relative", zIndex: 1, maxWidth: "240px", maxHeight: "280px", width: "100%", objectFit: "contain", opacity: imgLoaded ? 1 : 0, transform: imgLoaded ? "scale(1)" : "scale(0.92)", transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1)", filter: "drop-shadow(0 16px 32px rgba(45,27,18,0.22))" }}
+          />
           {!imgLoaded && <div style={{ position: "absolute", width: "180px", height: "220px", borderRadius: "16px", background: "linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.2) 100%)", backgroundSize: "400px 100%", animation: "qv-shimmer 1.4s linear infinite", zIndex: 1 }} />}
-          {product.originalPrice && <div style={{ position: "absolute", top: "16px", left: "16px", background: QV_T.terra, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.5px", borderRadius: "20px", padding: "5px 12px", boxShadow: "0 4px 12px rgba(192,74,59,0.4)", animation: "qv-badge-slide 0.5s ease 0.3s both" }}>{(() => { const original = parseInt(String(product.originalPrice).replace(/\D/g, ""), 10); const current = parseInt(String(product.price).replace(/\D/g, ""), 10); return Number.isFinite(original) && Number.isFinite(current) && original > 0 ? Math.round(((original - current) / original) * 100) : 0; })()}% OFF</div>}
+          {product.originalPrice && (
+            <div style={{ position: "absolute", top: "16px", left: "16px", background: QV_T.terra, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.5px", borderRadius: "20px", padding: "5px 12px", boxShadow: "0 4px 12px rgba(192,74,59,0.4)", animation: "qv-badge-slide 0.5s ease 0.3s both" }}>
+              {(() => {
+                const original = parseInt(String(product.originalPrice).replace(/\D/g, ""), 10);
+                const current  = parseInt(String(product.price).replace(/\D/g, ""), 10);
+                return Number.isFinite(original) && Number.isFinite(current) && original > 0
+                  ? Math.round(((original - current) / original) * 100) : 0;
+              })()}% OFF
+            </div>
+          )}
         </div>
+
+        {/* RIGHT: details */}
         <div style={{ padding: "32px 32px 32px 28px", display: "flex", flexDirection: "column", gap: "0px", overflowY: "auto", position: "relative", maxHeight: "calc(100vh - 32px)" }}>
-          <button className="qv-close-btn" onClick={onClose} aria-label="Close" style={{ position: "absolute", top: "16px", right: "16px", width: "36px", height: "36px", borderRadius: "50%", border: `1.5px solid ${QV_T.lightBorder}`, background: "rgba(240,232,220,0.6)", color: QV_T.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "background 0.2s ease, color 0.2s ease, transform 0.3s ease", outline: "none", flexShrink: 0, zIndex: 2 }}><X size={16} strokeWidth={2.5} /></button>
-          {product.coreBenefit && <div style={{ marginBottom: "14px" }}><span style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: `linear-gradient(135deg, rgba(122,67,38,0.10), rgba(192,74,59,0.08))`, border: `1px solid rgba(122,67,38,0.18)`, borderRadius: "20px", padding: "5px 12px", fontFamily: QV_T.body, fontWeight: 600, fontSize: "0.68rem", letterSpacing: "2px", textTransform: "uppercase", color: QV_T.primary }}><Sparkles size={10} color={QV_T.terra} strokeWidth={2} />{product.coreBenefit}</span></div>}
-          <h2 style={{ fontFamily: QV_T.heading, fontSize: "clamp(1.3rem, 2.4vw, 1.65rem)", fontWeight: 700, color: QV_T.dark, margin: "0 0 10px", lineHeight: 1.25, paddingRight: "32px" }}>{product.name}</h2>
+          <button className="qv-close-btn" onClick={onClose} aria-label="Close" style={{ position: "absolute", top: "16px", right: "16px", width: "36px", height: "36px", borderRadius: "50%", border: `1.5px solid ${QV_T.lightBorder}`, background: "rgba(240,232,220,0.6)", color: QV_T.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "background 0.2s ease, color 0.2s ease, transform 0.3s ease", outline: "none", flexShrink: 0, zIndex: 2 }}>
+            <X size={16} strokeWidth={2.5} />
+          </button>
+
+          {product.coreBenefit && (
+            <div style={{ marginBottom: "14px" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: `linear-gradient(135deg, rgba(122,67,38,0.10), rgba(192,74,59,0.08))`, border: `1px solid rgba(122,67,38,0.18)`, borderRadius: "20px", padding: "5px 12px", fontFamily: QV_T.body, fontWeight: 600, fontSize: "0.68rem", letterSpacing: "2px", textTransform: "uppercase", color: QV_T.primary }}>
+                <Sparkles size={10} color={QV_T.terra} strokeWidth={2} />{product.coreBenefit}
+              </span>
+            </div>
+          )}
+
+          <h2 style={{ fontFamily: QV_T.heading, fontSize: "clamp(1.3rem, 2.4vw, 1.65rem)", fontWeight: 700, color: QV_T.dark, margin: "0 0 10px", lineHeight: 1.25, paddingRight: "32px" }}>
+            {product.name}
+          </h2>
+
           <div style={{ width: "40px", height: "2px", background: `linear-gradient(to right, ${QV_T.primary}, ${QV_T.terra})`, borderRadius: "2px", marginBottom: "14px" }} />
+
           <div style={{ display: "flex", alignItems: "baseline", gap: "10px", marginBottom: "14px", flexWrap: "wrap" }}>
-            <span style={{ fontFamily: QV_T.body, fontWeight: 700, fontSize: "1.55rem", color: QV_T.terra, letterSpacing: "-0.3px" }}>{typeof product.price === "number" ? product.price.toLocaleString("vi-VN") + "₫" : product.price}</span>
-            {product.originalPrice && <span style={{ fontFamily: QV_T.body, fontWeight: 400, fontSize: "0.95rem", color: QV_T.muted, textDecoration: "line-through" }}>{typeof product.originalPrice === "number" ? product.originalPrice.toLocaleString("vi-VN") + "₫" : product.originalPrice}</span>}
+            <span style={{ fontFamily: QV_T.body, fontWeight: 700, fontSize: "1.55rem", color: QV_T.terra, letterSpacing: "-0.3px" }}>
+              {typeof product.price === "number" ? product.price.toLocaleString("vi-VN") + "₫" : product.price}
+            </span>
+            {product.originalPrice && (
+              <span style={{ fontFamily: QV_T.body, fontWeight: 400, fontSize: "0.95rem", color: QV_T.muted, textDecoration: "line-through" }}>
+                {typeof product.originalPrice === "number" ? product.originalPrice.toLocaleString("vi-VN") + "₫" : product.originalPrice}
+              </span>
+            )}
           </div>
-          {product.tagline && <p style={{ fontFamily: QV_T.heading, fontStyle: "italic", fontWeight: 400, fontSize: "0.9rem", color: QV_T.mid, lineHeight: 1.6, margin: "0 0 18px", borderLeft: `2px solid ${QV_T.terra}44`, paddingLeft: "12px" }}>{product.tagline}</p>}
-          {product.benefits?.length > 0 && <ul style={{ listStyle: "none", margin: "0 0 20px", padding: 0, display: "flex", flexDirection: "column", gap: "8px" }}>{product.benefits.map((benefit, i) => (<li key={i} className="qv-benefit-item" style={{ display: "flex", alignItems: "flex-start", gap: "9px", animationDelay: `${0.15 + i * 0.07}s` }}><span style={{ flexShrink: 0, width: "18px", height: "18px", borderRadius: "50%", background: `linear-gradient(135deg, ${QV_T.primary}22, ${QV_T.terra}18)`, border: `1.5px solid ${QV_T.primary}33`, display: "flex", alignItems: "center", justifyContent: "center", marginTop: "1px" }}><Check size={10} color={QV_T.primary} strokeWidth={3} /></span><span style={{ fontFamily: QV_T.body, fontSize: "0.8rem", fontWeight: 400, color: QV_T.mid, lineHeight: 1.55 }}>{benefit}</span></li>))}</ul>}
-          <div style={{ flex: 1, minHeight: "8px" }} />
+
+          {product.tagline && (
+            <p style={{ fontFamily: QV_T.heading, fontStyle: "italic", fontWeight: 400, fontSize: "0.9rem", color: QV_T.mid, lineHeight: 1.6, margin: "0 0 18px", borderLeft: `2px solid ${QV_T.terra}44`, paddingLeft: "12px" }}>
+              {product.tagline}
+            </p>
+          )}
+
+          {product.benefits?.length > 0 && (
+            <ul style={{ listStyle: "none", margin: "0 0 18px", padding: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
+              {product.benefits.map((benefit, i) => (
+                <li key={i} className="qv-benefit-item" style={{ display: "flex", alignItems: "flex-start", gap: "9px", animationDelay: `${0.15 + i * 0.07}s` }}>
+                  <span style={{ flexShrink: 0, width: "18px", height: "18px", borderRadius: "50%", background: `linear-gradient(135deg, ${QV_T.primary}22, ${QV_T.terra}18)`, border: `1.5px solid ${QV_T.primary}33`, display: "flex", alignItems: "center", justifyContent: "center", marginTop: "1px" }}>
+                    <Check size={10} color={QV_T.primary} strokeWidth={3} />
+                  </span>
+                  <span style={{ fontFamily: QV_T.body, fontSize: "0.8rem", fontWeight: 400, color: QV_T.mid, lineHeight: 1.55 }}>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* ── NUTRITIONAL INFO BLOCK ── */}
+          <div style={{ background: QV_T.light, border: `1px solid rgba(122,67,38,0.12)`, borderRadius: "14px", padding: "14px 16px", marginBottom: "18px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: "10px" }}>
+              <FlaskConical size={11} color={QV_T.primary} strokeWidth={2} />
+              <span style={{ fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.62rem", letterSpacing: "2px", textTransform: "uppercase", color: QV_T.primary }}>
+                Thông tin dinh dưỡng / 100g
+              </span>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 16px" }}>
+              {nutritionRows.map(({ label, value }) => (
+                <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 4, borderBottom: `1px dashed rgba(122,67,38,0.1)`, paddingBottom: "4px" }}>
+                  <span style={{ fontFamily: QV_T.body, fontSize: "0.68rem", color: QV_T.muted, whiteSpace: "nowrap" }}>{label}</span>
+                  <span style={{ fontFamily: QV_T.body, fontSize: "0.7rem", fontWeight: 700, color: QV_T.dark }}>{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ flex: 1, minHeight: "4px" }} />
+
+          {/* ── BOTTOM: qty + CTA ── */}
           <div style={{ borderTop: `1px solid ${QV_T.lightBorder}`, paddingTop: "18px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <span style={{ fontFamily: QV_T.body, fontWeight: 600, fontSize: "0.75rem", letterSpacing: "1.5px", textTransform: "uppercase", color: QV_T.muted }}>Số lượng</span>
               <QuantitySelector quantity={quantity} onChange={setQuantity} />
             </div>
-            <button className="qv-cart-btn" onClick={handleAddToCart} style={{ width: "100%", padding: "15px 24px", borderRadius: "40px", border: "none", background: `linear-gradient(135deg, ${QV_T.primary} 0%, #9B5432 100%)`, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", boxShadow: `0 8px 28px rgba(122,67,38,0.35)`, transition: "background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease", outline: "none" }}><ShoppingCart size={17} strokeWidth={2} />Thêm vào giỏ hàng</button>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>{["100% Tự nhiên", "Ép lạnh", "Không phụ gia"].map((badge) => <span key={badge} style={{ fontFamily: QV_T.body, fontSize: "0.65rem", fontWeight: 600, letterSpacing: "1px", color: QV_T.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: "4px" }}><span style={{ width: "4px", height: "4px", borderRadius: "50%", background: QV_T.terra, opacity: 0.6, flexShrink: 0 }} />{badge}</span>)}</div>
+            <button className="qv-cart-btn" onClick={handleAddToCart} style={{ width: "100%", padding: "15px 24px", borderRadius: "40px", border: "none", background: `linear-gradient(135deg, ${QV_T.primary} 0%, #9B5432 100%)`, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.8rem", letterSpacing: "2px", textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", boxShadow: `0 8px 28px rgba(122,67,38,0.35)`, transition: "background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease", outline: "none" }}>
+              <ShoppingCart size={17} strokeWidth={2} />Thêm vào giỏ hàng
+            </button>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", flexWrap: "wrap" }}>
+              {["100% Tự nhiên", "Ép lạnh", "Không phụ gia"].map((badge) => (
+                <span key={badge} style={{ fontFamily: QV_T.body, fontSize: "0.65rem", fontWeight: 600, letterSpacing: "1px", color: QV_T.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: "4px" }}>
+                  <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: QV_T.terra, opacity: 0.6, flexShrink: 0 }} />{badge}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
+
         <style>{`@media (max-width: 620px) { #moamoa-qv-grid { grid-template-columns: 1fr !important; } }`}</style>
       </div>
     </div>
@@ -1633,7 +1840,7 @@ export default function MoaMoa() {
         <Footer />
         <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
         <QuickViewModal product={selectedProduct} isOpen={!!selectedProduct} onClose={() => setSelectedProduct(null)} onAddToCart={handleAddToCart} />
-        <SlideCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartItems={cartItems} onDecreaseQty={handleDecreaseQty} onRemoveItem={handleRemoveItem} />
+        <SlideCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartItems={cartItems} onDecreaseQty={handleDecreaseQty} onIncreaseQty={(item) => handleAddToCart(item, 1)} onRemoveItem={handleRemoveItem} />
       </div>
     </>
   );
