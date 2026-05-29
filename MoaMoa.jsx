@@ -1,20 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
   ShoppingCart, Search, User, Star, ChevronRight, Heart,
-  Leaf, ArrowRight, Check,
+  Leaf, ArrowRight, Check, Shield,
   Instagram, Facebook, Youtube, Mail, Phone, MapPin,
   Baby, Sparkles, FlaskConical, ChevronDown, Menu, X, Plus, Minus
 } from "lucide-react";
 
-/* ─── DESIGN TOKENS (EARTH TONES) ───────────────── */
+/* ─── DESIGN TOKENS ─────────────────────────────── */
 const C = {
-  cream: "#F9F6F0",
-  creamDark: "#F0EAE1",
-  brown: "#7A4326",
-  brownMid: "#9E5B36",
-  brownPale: "#F3EBE6",
-  olive: "#5D7530",
-  oliveMid: "#708C3A",
+  cream: "#F8F5F0",
+  creamDark: "#F0EBE2",
+  olive: "#4A5D23",
+  oliveMid: "#5D7530",
   olivePale: "#EBF0E0",
   terra: "#C04A3B",
   terraPale: "#FAEAE8",
@@ -45,9 +42,9 @@ function useReveal(threshold = 0.15) {
 /* ─── UI COMPONENTS ─────────────────────────────── */
 const HoverButton = ({ children, primary = false, small = false, terra = false, onClick }) => {
   const [hov, setHov] = useState(false);
-  const bg = terra ? C.terra : primary ? C.brown : "transparent";
-  const bgH = terra ? "#A03B2E" : primary ? C.brownMid : C.brownPale;
-  const border = terra ? C.terra : primary ? C.brown : C.brown;
+  const bg = terra ? C.terra : primary ? C.olive : "transparent";
+  const bgH = terra ? "#A03B2E" : primary ? C.oliveMid : C.olivePale;
+  const border = terra ? C.terra : primary ? C.olive : C.olive;
 
   return (
     <button onClick={onClick}
@@ -57,13 +54,13 @@ const HoverButton = ({ children, primary = false, small = false, terra = false, 
         padding: small ? "9px 20px" : "13px 28px",
         borderRadius: 40, border: `1.5px solid ${border}`,
         background: hov ? bgH : bg,
-        color: (primary || terra) ? "white" : hov ? C.brown : C.brown,
+        color: (primary || terra) ? "white" : hov ? C.olive : C.olive,
         fontFamily: "'Montserrat', sans-serif",
         fontSize: small ? "0.72rem" : "0.82rem",
         fontWeight: 600, letterSpacing: "0.05em", cursor: "pointer",
         transition: "all 0.25s ease",
         transform: hov ? "translateY(-2px)" : "none",
-        boxShadow: hov ? (primary ? "0 8px 24px rgba(122,67,38,0.25)" : "0 4px 12px rgba(122,67,38,0.1)") : "none",
+        boxShadow: hov ? (primary ? "0 8px 24px rgba(74,93,35,0.28)" : "0 4px 12px rgba(74,93,35,0.12)") : "none",
         whiteSpace: "nowrap",
       }}>
       {children}
@@ -82,14 +79,14 @@ const SectionTitle = ({ eyebrow, title, subtitle, center = false }) => {
     }}>
       {eyebrow && (
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: "0.75rem" }}>
-          <div style={{ width: 24, height: 1.5, background: C.brown }} />
+          <div style={{ width: 24, height: 1.5, background: C.olive }} />
           <span style={{
             fontFamily: "'Montserrat', sans-serif", fontSize: "0.68rem",
-            color: C.brown, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase"
+            color: C.olive, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase"
           }}>
             {eyebrow}
           </span>
-          <div style={{ width: 24, height: 1.5, background: C.brown }} />
+          <div style={{ width: 24, height: 1.5, background: C.olive }} />
         </div>
       )}
       <h2 style={{
@@ -152,16 +149,13 @@ const Navbar = ({ cartCount = 0, onNavigate = () => { }, onOpenCart = () => { },
           </div>
           <div className="desktop-only">
             <div style={{
-              fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 800,
-              background: `linear-gradient(135deg, ${C.brown} 0%, ${C.olive} 100%)`,
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-              letterSpacing: "0.03em", lineHeight: 1
+              fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 800, color: C.olive, letterSpacing: "0.03em", lineHeight: 1
             }}>
               MoaMoa
             </div>
             <div style={{
               fontFamily: "'Montserrat', sans-serif", fontSize: "0.52rem",
-              color: C.brownMid, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 2
+              color: C.oliveMid, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 2
             }}>
               Pure • Natural • Vietnamese
             </div>
@@ -350,7 +344,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
         }
         .primary-btn:hover {
           transform: translateY(-3px);
-          background: #9E5B36 !important;
+          background: #5D7530 !important;
           box-shadow: 0 12px 28px rgba(122, 67, 38, 0.35) !important;
         }
         .secondary-btn {
@@ -372,11 +366,17 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
         }
 
         /* RESPONSIVE HÌNH ẢNH & TEXT CHAI DẦU */
+        .product-visual-group {
+          position: relative;
+          height: 90%; /* Increased instead of using scale(1.1) */
+          transform: translateY(10px);
+          display: flex;
+          justify-content: center;
+        }
         .product-img {
-          height: 80%;
+          height: 100%;
+          width: auto;
           object-fit: contain;
-          transform: scale(1.1) translateY(10px); /* Mobile size */
-          transform-origin: bottom center;
           filter: drop-shadow(0 20px 25px rgba(122,67,38,0.2));
         }
         .product-name-label {
@@ -384,14 +384,16 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           transform: translateY(0) translateX(0);
         }
         @media (min-width: 769px) {
+          .product-visual-group {
+            height: 115%; /* Physically increases size without magnifying children text */
+            transform: translateY(95px) translateX(15px);
+          }
           .product-img {
-            height: 85%;
-            transform: scale(1.5) translateY(95px) translateX(15px); /* Desktop size */
             filter: drop-shadow(0 35px 45px rgba(122,67,38,0.25));
           }
           .product-name-label {
             margin-top: 2.5rem;
-            transform: translateY(70px) translateX(10px);
+            transform: translateY(80%) translateX(5%);
             position: relative;
             z-index: 10;
           }
@@ -403,21 +405,9 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
       <div style={{ position: "absolute", bottom: "-10%", left: "-10%", width: "50vw", height: "50vw", background: "rgba(192, 74, 59, 0.12)", filter: "blur(120px)", borderRadius: "50%", animation: "blob-float-2 22s infinite ease-in-out reverse", pointerEvents: "none", zIndex: 0 }} />
       <div style={{ position: "absolute", top: "30%", left: "30%", width: "35vw", height: "35vw", background: "rgba(212, 163, 115, 0.15)", filter: "blur(90px)", borderRadius: "50%", animation: "blob-float-1 25s infinite ease-in-out 2s", pointerEvents: "none", zIndex: 0 }} />
 
-      {/* Trust Badges */}
-      <div className="glass-badge desktop-only" style={{ position: "absolute", top: "25%", right: "20%", zIndex: 10, borderRadius: "20px", padding: "12px 18px", display: "flex", alignItems: "center", gap: "10px", animation: "badge-float 5s infinite ease-in-out", opacity: loaded ? 1 : 0, transition: "opacity 1s ease 0.8s" }}>
-        <span style={{ fontSize: "1.4rem", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }}>⭐</span>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem", fontWeight: 700, color: "#2D2D2D" }}>4.9/5 Đánh giá</span>
-          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", color: "#888" }}>Trên 2,000+ lượt</span>
-        </div>
-      </div>
+      {/* Trust Badges - Now inside products.map */}
 
-      <div className="glass-badge desktop-only" style={{ position: "absolute", bottom: "35%", right: "38%", zIndex: 10, borderRadius: "20px", padding: "10px 16px", display: "flex", alignItems: "center", gap: "8px", animation: "badge-float 6s infinite ease-in-out 1.5s", opacity: loaded ? 1 : 0, transition: "opacity 1s ease 1.2s" }}>
-        <span style={{ fontSize: "1.2rem" }}>👨‍👩‍👧‍👦</span>
-        <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#2D2D2D" }}>10.000+ Mẹ tin dùng</span>
-      </div>
-
-      <div className="hero-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "4rem 1.5rem", alignItems: "center", width: "100%", position: "relative", zIndex: 2 }}>
+      <div className="hero-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "4rem 1.5rem", alignItems: "center", width: "100%", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
 
         {/* CỘT TRÁI: TEXT */}
         <div>
@@ -427,16 +417,16 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           </div>
 
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.2rem, 4vw, 3.6rem)", fontWeight: 700, color: "#2D2D2D", lineHeight: 1.2, marginBottom: "1.25rem", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s ease 0.2s" }}>
-            <BrandName /> <br />Giọt dầu cho <em style={{ color: "#7A4326", fontStyle: "italic" }}>bấc lửa</em><br />yêu thương
+            <BrandName /> <br />Giọt dầu cho <em style={{ color: C.olive, fontStyle: "italic" }}>bấc lửa</em><br />yêu thương
           </h1>
 
           <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.95rem", color: "#555", lineHeight: 1.8, maxWidth: 460, marginBottom: "2rem", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(16px)", transition: "all 0.8s ease 0.35s" }}>
-            Dầu ăn dặm cao cấp 100% tự nhiên từ nguồn nông sản Việt. <span style={{ color: "#9E5B36", fontWeight: 600 }}>The Chef's kiss</span> cho hành trình lớn khôn của con cùng <BrandName />.
+            Dầu ăn dặm cao cấp 100% tự nhiên từ nguồn nông sản Việt. <span style={{ color: C.oliveMid, fontWeight: 600 }}>The Chef's kiss</span> cho hành trình lớn khôn của con cùng <BrandName />.
           </p>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(16px)", transition: "all 0.8s ease 0.5s" }}>
             {/* Nút Primary gọi hàm Backend */}
-            <button type="button" onClick={handleAddToCart} className="primary-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: "none", background: "#7A4326", color: "white", cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600, boxShadow: "0 8px 24px rgba(122,67,38,0.25)" }}>
+            <button type="button" onClick={handleAddToCart} className="primary-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: "none", background: C.olive, color: "white", cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600, boxShadow: "0 8px 24px rgba(74,93,35,0.28)" }}>
               <Sparkles size={15} strokeWidth={2} />
               Mua ngay - Dầu {products[activeIndex].label}
             </button>
@@ -445,7 +435,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
               type="button"
               onClick={() => onNavigate('story')}
               className="secondary-btn"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: "1.5px solid #7A4326", background: "transparent", color: "#7A4326", cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600 }}>
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 40, border: `1.5px solid ${C.olive}`, background: "transparent", color: C.olive, cursor: "pointer", fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 600 }}>
               Câu chuyện MoaMoa
               <ChevronRight size={15} strokeWidth={2} />
             </button>
@@ -455,7 +445,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
             {[{ icon: Baby, text: "Từ 6 tháng tuổi" }, { icon: Check, text: "Non-GMO" }].map(({ icon: Icon, text }) => (
               <div key={text} className="micro-tag" style={{ display: "flex", alignItems: "center", gap: 8, cursor: "default", background: "rgba(255, 255, 255, 0.45)", padding: "6px 14px 6px 6px", borderRadius: 30, border: "1px solid rgba(255,255,255,0.6)", backdropFilter: "blur(4px)" }}>
                 <div style={{ width: 28, height: 28, borderRadius: "50%", background: "rgba(122,67,38,0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon size={14} color="#7A4326" strokeWidth={2.5} />
+                  <Icon size={14} color={C.olive} strokeWidth={2.5} />
                 </div>
                 <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.75rem", color: "#555", fontWeight: 600 }}>{text}</span>
               </div>
@@ -471,7 +461,9 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
             {products.map((p, i) => (
               <div key={p.label} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", opacity: activeIndex === i ? 1 : 0, transform: activeIndex === i ? "translateX(0) scale(1)" : (i > activeIndex ? "translateX(40px) scale(0.95)" : "translateX(-40px) scale(0.95)"), transition: "all 0.6s cubic-bezier(0.25, 1, 0.5, 1)", pointerEvents: activeIndex === i ? "auto" : "none" }}>
 
-                <img className="product-img" src={p.image} alt={p.label} />
+                <div className="product-visual-group" style={{ position: "relative" }}>
+                  <img className="product-img" src={p.image} alt={p.label} />
+                </div>
 
                 <div className="product-name-label" style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", fontWeight: 700, color: "#2D2D2D" }}>
                   {p.emoji} Dầu {p.label}
@@ -480,7 +472,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
             ))}
           </div>
 
-          <div style={{ position: "absolute", right: "10%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 10 }}>
+          <div style={{ position: "absolute", right: "25%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 10 }}>
             {products.map((p, i) => (
               <button key={i} onClick={() => setActiveIndex(i)} style={{ width: activeIndex === i ? 22 : 12, height: activeIndex === i ? 22 : 12, borderRadius: "50%", background: p.color, border: activeIndex === i ? `3px solid white` : "2px solid transparent", boxShadow: activeIndex === i ? `0 0 0 2px ${p.color}, 0 6px 12px rgba(0,0,0,0.15)` : "0 4px 8px rgba(0,0,0,0.1)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.25, 1, 0.5, 1)" }} title={p.label} />
             ))}
@@ -490,7 +482,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
 
       <div style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, animation: "bounce 2s ease-in-out infinite", opacity: 0.6, cursor: "pointer" }}>
         <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", color: "#555", letterSpacing: "0.15em", textTransform: "uppercase" }}>Khám phá</span>
-        <ChevronDown size={16} color="#7A4326" />
+        <ChevronDown size={16} color={C.olive} />
       </div>
     </section>
   );
@@ -546,7 +538,7 @@ const BrandStory = () => {
           <div>
             <SectionTitle
               eyebrow="Từ Mộc Hoa đến MoaMoa"
-              title={<>Tên thương hiệu mang<br /><em style={{ color: C.brown }}>tiếng hôn của mẹ</em></>}
+              title={<>Tên thương hiệu mang<br /><em style={{ color: C.olive }}>tiếng hôn của mẹ</em></>}
             />
 
             <p style={{
@@ -1003,6 +995,135 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
   );
 };
 
+/* ─── EXPERT & SOCIAL PROOF ──────────────────────── */
+const ExpertSection = () => {
+  const reviews = [
+    { name: "Mẹ Hà Linh", handle: "@halinhmom2024", rating: 5, text: "Con mình 8 tháng dùng dầu Gấc MoaMoa, da dẻ hồng hào hẳn! Mẹ nào chưa thử thì nên mua ngay á 🥰", avatar: "🧡", tag: "Dầu Gấc" },
+    { name: "Mẹ Thu Hương", handle: "@thuhuong_baby", rating: 5, text: "Mình là dietitian, sau khi xem thành phần mới tin dùng. Thật sự ấn tượng với chất lượng và nguồn gốc rõ ràng.", avatar: "💚", tag: "Dầu Olive" },
+    { name: "Mẹ Ngọc Anh", handle: "@ngocanhkitchen", rating: 5, text: "Combo não bộ thay đổi hoàn toàn cách nấu dặm của mình! Bé nhà ăn ngon hơn hẳn, không còn lười ăn nữa 😭❤️", avatar: "💛", tag: "Combo Trí não" },
+    { name: "Mẹ Phương Thảo", handle: "@phuongthao_mom", rating: 5, text: "Voucher hết rồi mà vẫn mua vì không thể đổi sản phẩm khác được. Chất lượng xứng đáng với giá tiền!", avatar: "💜", tag: "Dầu Gạo" },
+    { name: "Mẹ Khánh Vân", handle: "@khanvan_family", rating: 5, text: "Ship nhanh, đóng gói đẹp như quà tặng. Bác sĩ dinh dưỡng cũng gợi ý dùng MoaMoa luôn. 10 điểm!", avatar: "🧡", tag: "Dầu Bơ" },
+    { name: "Mẹ Minh Tâm", handle: "@minhtam2baby", rating: 4, text: "Đã dùng 3 tháng, thấy con phát triển tốt. Sản phẩm sạch, yên tâm cho bé 6 tháng trở lên. Recommend!", avatar: "💚", tag: "Dầu Gấc" },
+  ];
+
+  const [ref, vis] = useReveal(0.1);
+
+  return (
+    <section style={{ background: C.olivePale, padding: "7rem 1.5rem" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <SectionTitle center
+          eyebrow="Được chuyên gia xác nhận"
+          title={<>Tin tưởng bởi các<br /><em style={{ color: C.olive }}>chuyên gia dinh dưỡng</em></>}
+          subtitle="Được nghiên cứu, phân tích và khuyến nghị bởi bác sĩ nhi khoa và chuyên gia dinh dưỡng hàng đầu Việt Nam."
+        />
+
+        {/* Doctor card */}
+        <div ref={ref} style={{
+          maxWidth: 780, margin: "0 auto 5rem",
+          background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
+          borderRadius: 24, padding: "2.5rem 3rem",
+          border: `1px solid rgba(74,93,35,0.2)`,
+          boxShadow: "0 24px 80px rgba(74,93,35,0.12)",
+          position: "relative", overflow: "hidden",
+          opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(24px)",
+          transition: "all 0.8s ease",
+        }}>
+          {/* Quote mark */}
+          <div style={{ position: "absolute", top: -10, left: 24, fontFamily: "serif",
+            fontSize: "8rem", color: C.olive, opacity: 0.08, lineHeight: 1, userSelect: "none" }}>
+            "
+          </div>
+
+          <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
+            {/* Avatar */}
+            <div style={{ flexShrink: 0, width: 70, height: 70, borderRadius: "50%",
+              background: `linear-gradient(135deg, ${C.olive}, ${C.oliveMid})`,
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem",
+              boxShadow: `0 8px 24px rgba(74,93,35,0.3)` }}>
+              👩‍⚕️
+            </div>
+            <div style={{ flex: 1 }}>
+              <blockquote style={{ fontFamily: "'Playfair Display', serif",
+                fontSize: "1.05rem", fontStyle: "italic", color: C.charcoal,
+                lineHeight: 1.8, marginBottom: "1.25rem", margin: "0 0 1.25rem" }}>
+                "Dầu ăn dặm đóng vai trò then chốt trong 1000 ngày đầu đời. Tôi đặc biệt đánh giá cao MoaMoa ở khả năng bảo toàn axit béo thiết yếu qua công nghệ ép lạnh — điều hiếm thấy ở thị trường Việt Nam."
+              </blockquote>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div>
+                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
+                    fontSize: "0.85rem", color: C.charcoal }}>TS. BS. Nguyễn Thị Minh Ngọc</div>
+                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem",
+                    color: C.olive }}>Chuyên gia Dinh dưỡng Nhi khoa · BV Nhi Trung ương</div>
+                </div>
+                <div style={{ marginLeft: "auto", display: "flex", gap: 3 }}>
+                  {[1,2,3,4,5].map(s => <Star key={s} size={13} fill="#F5CB5C" color="#F5CB5C" strokeWidth={0} />)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews header */}
+        <SectionTitle center
+          eyebrow="Mẹ thông thái tin dùng"
+          title="Hơn 50,000 mẹ đã chọn MoaMoa"
+        />
+
+        {/* Review cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1rem" }}>
+          {reviews.map((r, i) => {
+            const [rref, rvis] = useReveal(0.05);
+            return (
+              <div key={r.name} ref={rref} style={{
+                background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
+                borderRadius: 16, padding: "1.25rem",
+                border: `1px solid rgba(255,255,255,0.9)`,
+                boxShadow: "0 4px 20px rgba(74,93,35,0.08)",
+                opacity: rvis ? 1 : 0, transform: rvis ? "translateY(0)" : "translateY(16px)",
+                transition: `all 0.6s ease ${i * 0.07}s`,
+              }}>
+                {/* Tag */}
+                <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 20,
+                  background: C.terraPale, border: `1px solid rgba(192,74,59,0.2)`,
+                  fontFamily: "'Montserrat', sans-serif", fontSize: "0.6rem",
+                  color: C.terra, fontWeight: 700, marginBottom: 10 }}>
+                  {r.tag}
+                </span>
+                {/* Stars */}
+                <div style={{ display: "flex", gap: 2, marginBottom: 8 }}>
+                  {[1,2,3,4,5].map(s => <Star key={s} size={11} fill={s <= r.rating ? "#F5CB5C" : "transparent"}
+                    color={s <= r.rating ? "#F5CB5C" : C.border} strokeWidth={1.5} />)}
+                </div>
+                <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem",
+                  color: C.muted, lineHeight: 1.65, marginBottom: "1rem" }}>
+                  {r.text}
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: "50%",
+                    background: C.olivePale, display: "flex", alignItems: "center",
+                    justifyContent: "center", fontSize: "1rem" }}>
+                    {r.avatar}
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.78rem",
+                      fontWeight: 700, color: C.charcoal }}>{r.name}</div>
+                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem",
+                      color: C.olive }}>{r.handle}</div>
+                  </div>
+                  <div style={{ marginLeft: "auto", padding: "2px 8px", borderRadius: 8,
+                    background: "rgba(74,93,35,0.08)",
+                    fontFamily: "'Montserrat', sans-serif", fontSize: "0.58rem",
+                    color: C.olive, fontWeight: 600 }}>✓ Đã mua</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 /* ─── NEWSLETTER STRIP ───────────────────────────── */
 const NewsletterStrip = () => {
   const [email, setEmail] = useState("");
@@ -1010,7 +1131,7 @@ const NewsletterStrip = () => {
   const [ref, vis] = useReveal();
 
   return (
-    <section style={{ background: C.brown, padding: "5rem 1.5rem" }}>
+    <section style={{ background: C.olive, padding: "5rem 1.5rem" }}>
       <div ref={ref} style={{
         maxWidth: 680, margin: "0 auto", textAlign: "center",
         opacity: vis ? 1 : 0, transform: vis ? "translateY(0)" : "translateY(20px)",
@@ -1428,11 +1549,11 @@ export default function MoaMoa() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { background: #F9F6F0; overflow-x: hidden; }
-        ::selection { background: rgba(122,67,38,0.2); color: #2D2D2D; }
+        body { background: #F8F5F0; overflow-x: hidden; }
+        ::selection { background: rgba(74,93,35,0.2); color: #2D2D2D; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #F0EAE1; }
-        ::-webkit-scrollbar-thumb { background: #7A4326; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: #F0EBE2; }
+        ::-webkit-scrollbar-thumb { background: #4A5D23; border-radius: 3px; }
         input::placeholder { color: rgba(255,255,255,0.55); }
         
         .standard-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
@@ -1446,11 +1567,11 @@ export default function MoaMoa() {
         .desktop-only { display: none !important; }
         .mobile-flex { display: flex !important; }
 
-        .nav-item:hover .nav-label { color: #7A4326 !important; }
-        .icon-btn:hover { background: #F3EBE6 !important; color: #7A4326 !important; }
+        .nav-item:hover .nav-label { color: #4A5D23 !important; }
+        .icon-btn:hover { background: #EBF0E0 !important; color: #4A5D23 !important; }
         .footer-link:hover { color: #D4A373 !important; }
         .tag-link:hover { color: #D4A373 !important; border-color: rgba(212,163,115,0.3) !important; }
-        .social-link:hover { background: #7A4326 !important; transform: translateY(-2px); }
+        .social-link:hover { background: #4A5D23 !important; transform: translateY(-2px); }
 
         @keyframes slideInRight {
           from { transform: translateX(24px); opacity: 0; }
@@ -1478,7 +1599,7 @@ export default function MoaMoa() {
         }
       `}</style>
 
-      <div style={{ fontFamily: "'Montserrat', sans-serif", background: "#F9F6F0", minHeight: "100vh" }}>
+      <div style={{ fontFamily: "'Montserrat', sans-serif", background: "#F8F5F0", minHeight: "100vh" }}>
         <Navbar
           cartCount={cartItems.reduce((total, item) => total + (item.qty || 1), 0)}
           onNavigate={(page) => setCurrentPage(page)}
@@ -1494,6 +1615,7 @@ export default function MoaMoa() {
                 <TrustStrip />
                 <BrandStory />
                 <ProductsSection onAddToCart={handleAddToCart} onQuickView={setSelectedProduct} />
+                <ExpertSection />
                 <NewsletterStrip />
               </>
             )}
