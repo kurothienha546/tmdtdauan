@@ -284,11 +284,11 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
 
   const products = [
-    { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png",  emoji: "🍊", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png",emoji: "🫒", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png",  emoji: "🌾", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png",   emoji: "🥑", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_me",    name: "Dầu Mè Đen Ép Lạnh",     label: "Mè",   image: "/daume.png",   emoji: "🌱", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
+    { id: "sp_me",    name: "Dầu Mè Trắng Ép Lạnh",     label: "Mè",   image: "/daume.png", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
   ];
 
   const handleAddToCart = () => {
@@ -383,7 +383,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           }
           .product-name-label {
             margin-top: 2.5rem;
-            transform: translateY(80%) translateX(5%);
+            transform: translateY(85%) translateX(13%);
             position: relative;
             z-index: 10;
           }
@@ -628,7 +628,7 @@ const BrandStory = () => {
               <div style={{
                 fontFamily: "'Playfair Display', serif", fontSize: "1.6rem",
                 fontWeight: 700, color: C.terra, lineHeight: 1
-              }}>50K+</div>
+              }}>1000+</div>
               <div style={{
                 fontFamily: "'Montserrat', sans-serif", fontSize: "0.68rem",
                 color: C.muted, marginTop: 2
@@ -982,7 +982,7 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
     { id: "sp_olive", name: "Dầu Olive Extra Virgin", category: "Dầu ăn dặm", image: "/dauolive.png", tagline: "Nhập khẩu Địa Trung Hải, giàu Omega-9 cho não bộ", bg: "#EFF6E8", benefits: ["Omega-9", "Polyphenols", "Vit E"], price: 399000, stars: 5, reviews: 196, volume: "500ml", discount: 15, originalPrice: 470000 },
     { id: "sp_gao", name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: 399000, stars: 4, reviews: 312, volume: "500ml" },
     { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: 399000, stars: 5, reviews: 156, volume: "500ml" },
-    { id: "sp_me", name: "Dầu Mè Đen Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
+    { id: "sp_me", name: "Dầu Mè Trắng Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
     { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", images: ["/daubo.png", "/daugao.png"], tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
     { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", images: ["/daugac.png", "/dauolive.png"], tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
     { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", images: ["/daume.png", "/daubo.png"], tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
@@ -1205,7 +1205,7 @@ const NewsletterStrip = () => {
 /* ─── FOOTER ─────────────────────────────────────── */
 const Footer = () => {
   const cols = [
-    { title: "Sản phẩm", links: ["Dầu Gấc nguyên chất", "Dầu Olive cho bé", "Dầu Gạo ăn dặm", "Dầu Bơ hữu cơ", "Dầu Mè đen ép lạnh", "Combo tiết kiệm"] },
+    { title: "Sản phẩm", links: ["Dầu Gấc nguyên chất", "Dầu Olive cho bé", "Dầu Gạo ăn dặm", "Dầu Bơ hữu cơ", "Dầu Mè trắng ép lạnh", "Combo tiết kiệm"] },
     { title: "Thông tin", links: ["Câu chuyện MoaMoa", "Chuyên gia dinh dưỡng", "Cẩm nang ăn dặm", "Vùng nguyên liệu", "Chứng nhận chất lượng"] },
     { title: "Hỗ trợ", links: ["Chính sách đổi trả", "Chương trình Affiliate", "Điều khoản sử dụng", "Chính sách bảo mật", "Liên hệ hợp tác"] },
   ];
