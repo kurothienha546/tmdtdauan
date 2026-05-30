@@ -277,26 +277,26 @@ const Navbar = ({ cartCount = 0, onNavigate = () => { }, onOpenCart = () => { },
 };
 
 /* ─── CẬP NHẬT HERO COMPONENT ────────────────────── */
+const HERO_PRODUCTS = [
+  { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_me",    name: "Dầu Mè Trắng Ép Lạnh",     label: "Mè",   image: "/daume.png", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
+];
+
 const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
   const [loaded, setLoaded] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => { setTimeout(() => setLoaded(true), 100); }, []);
 
-  const products = [
-    { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
-    { id: "sp_me",    name: "Dầu Mè Trắng Ép Lạnh",     label: "Mè",   image: "/daume.png", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
-  ];
-
   const handleAddToCart = () => {
-    const selectedProduct = products[activeIndex];
+    const selectedProduct = HERO_PRODUCTS[activeIndex];
     onAddToCart(selectedProduct);
   };
 
-  const activeProduct = products[activeIndex];
+  const activeProduct = HERO_PRODUCTS[activeIndex];
 
   const BrandName = () => (
     <span style={{
@@ -457,7 +457,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(122,67,38,0.08) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
           <div style={{ position: "relative", width: "100%", height: "100%", zIndex: 1 }}>
-            {products.map((p, i) => (
+            {HERO_PRODUCTS.map((p, i) => (
               <div key={p.label} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", opacity: activeIndex === i ? 1 : 0, transform: activeIndex === i ? "translateX(0) scale(1)" : (i > activeIndex ? "translateX(40px) scale(0.95)" : "translateX(-40px) scale(0.95)"), transition: "all 0.6s cubic-bezier(0.25, 1, 0.5, 1)", pointerEvents: activeIndex === i ? "auto" : "none" }}>
                 <div className="product-visual-group" style={{ position: "relative" }}>
                   <img className="product-img" src={p.image} alt={p.label} />
@@ -471,7 +471,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
 
           {/* Dot nav */}
           <div style={{ position: "absolute", right: "25%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 10 }}>
-            {products.map((p, i) => (
+            {HERO_PRODUCTS.map((p, i) => (
               <button key={i} onClick={() => setActiveIndex(i)} style={{ width: activeIndex === i ? 22 : 12, height: activeIndex === i ? 22 : 12, borderRadius: "50%", background: p.color, border: activeIndex === i ? `3px solid white` : "2px solid transparent", boxShadow: activeIndex === i ? `0 0 0 2px ${p.color}, 0 6px 12px rgba(0,0,0,0.15)` : "0 4px 8px rgba(0,0,0,0.1)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.25, 1, 0.5, 1)" }} title={p.label} />
             ))}
           </div>
@@ -487,13 +487,14 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
 };
 
 /* ─── TRUST STRIP (CHỨNG NHẬN & CAM KẾT) ───────────────── */
+const TRUST_ITEMS = [
+  { title: "KHÔNG CHẤT BẢO QUẢN", desc: "100% tinh chất ép lạnh mộc mạc", icon: "🌱" },
+  { title: "ĐẠT CHUẨN VIETGAP", desc: "Vùng nguyên liệu kiểm soát nghiêm ngặt", icon: "🛡️" },
+  { title: "KHÔNG BIẾN ĐỔI GEN (NON-GMO)", desc: "An toàn tuyệt đối cho hệ tiêu hóa của bé", icon: "🔬" },
+  { title: "BÁC SĨ KHUYÊN DÙNG", desc: "Công thức tối ưu cho bé từ 6 tháng tuổi", icon: "🩺" },
+];
+
 const TrustStrip = () => {
-  const trusts = [
-    { title: "KHÔNG CHẤT BẢO QUẢN", desc: "100% tinh chất ép lạnh mộc mạc", icon: "🌱" },
-    { title: "ĐẠT CHUẨN VIETGAP", desc: "Vùng nguyên liệu kiểm soát nghiêm ngặt", icon: "🛡️" },
-    { title: "KHÔNG BIẾN ĐỔI GEN (NON-GMO)", desc: "An toàn tuyệt đối cho hệ tiêu hóa của bé", icon: "🔬" },
-    { title: "BÁC SĨ KHUYÊN DÙNG", desc: "Công thức tối ưu cho bé từ 6 tháng tuổi", icon: "🩺" },
-  ];
 
   return (
     <div style={{ background: C.olivePale, borderBottom: `1px solid ${C.border}`, padding: "2rem 1.5rem" }}>
@@ -501,7 +502,7 @@ const TrustStrip = () => {
         maxWidth: 1280, margin: "0 auto", display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "2rem"
       }}>
-        {trusts.map((item, i) => (
+        {TRUST_ITEMS.map((item, i) => (
           <div key={i} style={{ display: "flex", gap: 12, alignItems: "center" }}>
             <div style={{ fontSize: "2rem", filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.05))" }}>
               {item.icon}
@@ -731,17 +732,17 @@ function TextCard({ eyebrow, title, body, align = "left" }) {
   );
 }
 
-function PhilosophySection() {
-  const rows = [
-    { textLeft: true, eyebrow: "Nguyên liệu & Quy trình", title: "Từ nông trại đến bàn ăn an toàn", body: "Những vùng đất nông nghiệp truyền thống của Việt Nam giờ được nâng chuẩn VietGAP — không phân bón hóa học, không chất bảo quản. Từng hạt lanh, hạt óc chó, hạt gấc đều trải qua quy trình kiểm định nghiêm ngặt trước khi được ép lạnh 100%, giữ trọn enzyme sống và dưỡng chất quý từ thiên nhiên.", imgSrc: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80&auto=format&fit=crop", imgAlt: "Organic Vietnamese farm" },
-    { textLeft: false, eyebrow: "Tâm lý & Gắn kết", title: "Một hương vị, một cảm xúc", body: "Khoa học gắn kết cho thấy bữa ăn dặm không chỉ là dinh dưỡng — đó là khoảnh khắc hình thành cảm giác an toàn trong lòng bé. MoaMoa được tạo ra để trở thành người bạn đồng hành, giúp mỗi muỗng bột thêm thơm, mỗi bữa ăn thêm ấm, và mỗi khoảnh khắc cùng con trở nên thật sự đáng nhớ.", imgSrc: "https://vitadairy.vn/s/images/truyen-thong/Tin%20t%E1%BB%A9c/calokid.jpg", imgAlt: "Mother and baby bonding" },
-  ];
+const PHILOSOPHY_ROWS = [
+  { textLeft: true, eyebrow: "Nguyên liệu & Quy trình", title: "Từ nông trại đến bàn ăn an toàn", body: "Những vùng đất nông nghiệp truyền thống của Việt Nam giờ được nâng chuẩn VietGAP — không phân bón hóa học, không chất bảo quản. Từng hạt lanh, hạt óc chó, hạt gấc đều trải qua quy trình kiểm định nghiêm ngặt trước khi được ép lạnh 100%, giữ trọn enzyme sống và dưỡng chất quý từ thiên nhiên.", imgSrc: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80&auto=format&fit=crop", imgAlt: "Organic Vietnamese farm" },
+  { textLeft: false, eyebrow: "Tâm lý & Gắn kết", title: "Một hương vị, một cảm xúc", body: "Khoa học gắn kết cho thấy bữa ăn dặm không chỉ là dinh dưỡng — đó là khoảnh khắc hình thành cảm giác an toàn trong lòng bé. MoaMoa được tạo ra để trở thành người bạn đồng hành, giúp mỗi muỗng bột thêm thơm, mỗi bữa ăn thêm ấm, và mỗi khoảnh khắc cùng con trở nên thật sự đáng nhớ.", imgSrc: "https://vitadairy.vn/s/images/truyen-thong/Tin%20t%E1%BB%A9c/calokid.jpg", imgAlt: "Mother and baby bonding" },
+];
 
+function PhilosophySection() {
   return (
     <section style={{ padding: "96px 24px", background: T.bg }}>
       <FadeIn delay={0}><div style={{ textAlign: "center", marginBottom: "72px" }}><span style={{ fontFamily: T.bodyFont, fontSize: "10px", fontWeight: 600, letterSpacing: "3.5px", textTransform: "uppercase", color: T.accent }}>Triết lý MoaMoa</span><h2 style={{ fontFamily: T.headingFont, fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 700, color: T.dark, margin: "12px 0 0" }}>Mỗi giọt đều có câu chuyện</h2></div></FadeIn>
       <div style={{ maxWidth: "1000px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "56px" }}>
-        {rows.map((row, i) => (
+        {PHILOSOPHY_ROWS.map((row, i) => (
           <FadeIn key={i} delay={0.1} direction={row.textLeft ? "left" : "right"}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px", alignItems: "stretch" }}>
               {row.textLeft ? (<><TextCard eyebrow={row.eyebrow} title={row.title} body={row.body} /><PhilosophyImage src={row.imgSrc} alt={row.imgAlt} /></>) : (<><PhilosophyImage src={row.imgSrc} alt={row.imgAlt} /><TextCard eyebrow={row.eyebrow} title={row.title} body={row.body} /></>)}
@@ -976,17 +977,18 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
 };
 
 /* ─── PRODUCTS SECTION ───────────────────────────── */
+const SHOP_PRODUCTS = [
+  { id: "sp_gac", name: "Dầu Gấc MoaMoa", category: "Dầu ăn dặm", image: "/daugac.png", tagline: "Nguồn Beta-carotene tự nhiên vượt trội, hỗ trợ thị lực", bg: "#FEF0EB", benefits: ["Beta-carotene", "Vitamin A", "Lycopene"], price: 399000, stars: 5, reviews: 284, volume: "500ml" },
+  { id: "sp_olive", name: "Dầu Olive Extra Virgin", category: "Dầu ăn dặm", image: "/dauolive.png", tagline: "Nhập khẩu Địa Trung Hải, giàu Omega-9 cho não bộ", bg: "#EFF6E8", benefits: ["Omega-9", "Polyphenols", "Vit E"], price: 399000, stars: 5, reviews: 196, volume: "500ml", discount: 15, originalPrice: 470000 },
+  { id: "sp_gao", name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: 399000, stars: 4, reviews: 312, volume: "500ml" },
+  { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: 399000, stars: 5, reviews: 156, volume: "500ml" },
+  { id: "sp_me", name: "Dầu Mè Trắng Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
+  { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", images: ["/daubo.png", "/daugao.png"], tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
+  { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", images: ["/daugac.png", "/dauolive.png"], tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
+  { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", images: ["/daume.png", "/daubo.png"], tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
+];
+
 const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) => {
-  const products = [
-    { id: "sp_gac", name: "Dầu Gấc MoaMoa", category: "Dầu ăn dặm", image: "/daugac.png", tagline: "Nguồn Beta-carotene tự nhiên vượt trội, hỗ trợ thị lực", bg: "#FEF0EB", benefits: ["Beta-carotene", "Vitamin A", "Lycopene"], price: 399000, stars: 5, reviews: 284, volume: "500ml" },
-    { id: "sp_olive", name: "Dầu Olive Extra Virgin", category: "Dầu ăn dặm", image: "/dauolive.png", tagline: "Nhập khẩu Địa Trung Hải, giàu Omega-9 cho não bộ", bg: "#EFF6E8", benefits: ["Omega-9", "Polyphenols", "Vit E"], price: 399000, stars: 5, reviews: 196, volume: "500ml", discount: 15, originalPrice: 470000 },
-    { id: "sp_gao", name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: 399000, stars: 4, reviews: 312, volume: "500ml" },
-    { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: 399000, stars: 5, reviews: 156, volume: "500ml" },
-    { id: "sp_me", name: "Dầu Mè Trắng Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
-    { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", images: ["/daubo.png", "/daugao.png"], tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
-    { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", images: ["/daugac.png", "/dauolive.png"], tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
-    { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", images: ["/daume.png", "/daubo.png"], tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
-  ];
 
   return (
     <section id="collection-section" style={{ background: C.creamDark, padding: "7rem 1.5rem" }}>
@@ -997,7 +999,7 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
           subtitle="Mỗi sản phẩm là một cam kết — từ vùng nguyên liệu đạt chuẩn đến dưỡng chất tốt nhất cho bấc lửa gia đình bạn."
         />
         <div className="product-grid">
-          {products.map((p, i) => (
+          {SHOP_PRODUCTS.map((p, i) => (
             <ProductCard key={p.name} product={p} index={i} featured={p.featured} onAddToCart={onAddToCart} onQuickView={onQuickView} />
           ))}
         </div>
@@ -1012,16 +1014,16 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
 };
 
 /* ─── EXPERT & SOCIAL PROOF ──────────────────────── */
-const ExpertSection = () => {
-  const reviews = [
-    { name: "Mẹ Hải Băng", handle: "@haibang2024", rating: 5, text: "Con mình 8 tháng dùng dầu Gấc MoaMoa, da dẻ hồng hào hẳn! Mẹ nào chưa thử thì nên mua ngay á 🥰", avatar: "🧡", tag: "Dầu Gấc" },
-    { name: "Mẹ Khánh Nghi", handle: "@khanhnghi_baby", rating: 5, text: "Mình là dietitian, sau khi xem thành phần mới tin dùng. Thật sự ấn tượng với chất lượng và nguồn gốc rõ ràng.", avatar: "💚", tag: "Dầu Olive" },
-    { name: "Mẹ Ngọc Anh", handle: "@ngocanhkitchen", rating: 5, text: "Combo não bộ thay đổi hoàn toàn cách nấu dặm của mình! Bé nhà ăn ngon hơn hẳn, không còn lười ăn nữa 😭❤️", avatar: "💛", tag: "Combo Trí não" },
-    { name: "Mẹ Phương Thảo", handle: "@phuongthao_mom", rating: 5, text: "Voucher hết rồi mà vẫn mua vì không thể đổi sản phẩm khác được. Chất lượng xứng đáng với giá tiền!", avatar: "💜", tag: "Dầu Gạo" },
-    { name: "Mẹ Khánh Vân", handle: "@khanvan_family", rating: 5, text: "Ship nhanh, đóng gói đẹp như quà tặng. Bác sĩ dinh dưỡng cũng gợi ý dùng MoaMoa luôn. 10 điểm!", avatar: "🧡", tag: "Dầu Bơ" },
-    { name: "Mẹ Thùy Vy", handle: "@thuyvy2baby", rating: 1, text: "Chất lượng thì không bàn cãi, nhưng chai dầu ăn 500ml mà bán 399k, tưởng tiền mọc trên cây hay gì á?", avatar: "💚", tag: "Dầu Gấc" },
-  ];
+const EXPERT_REVIEWS = [
+  { name: "Mẹ Hải Băng", handle: "@haibang2024", rating: 5, text: "Con mình 8 tháng dùng dầu Gấc MoaMoa, da dẻ hồng hào hẳn! Mẹ nào chưa thử thì nên mua ngay á 🥰", avatar: "🧡", tag: "Dầu Gấc" },
+  { name: "Mẹ Khánh Nghi", handle: "@khanhnghi_baby", rating: 5, text: "Mình là dietitian, sau khi xem thành phần mới tin dùng. Thật sự ấn tượng với chất lượng và nguồn gốc rõ ràng.", avatar: "💚", tag: "Dầu Olive" },
+  { name: "Mẹ Ngọc Anh", handle: "@ngocanhkitchen", rating: 5, text: "Combo não bộ thay đổi hoàn toàn cách nấu dặm của mình! Bé nhà ăn ngon hơn hẳn, không còn lười ăn nữa 😭❤️", avatar: "💛", tag: "Combo Trí não" },
+  { name: "Mẹ Phương Thảo", handle: "@phuongthao_mom", rating: 5, text: "Voucher hết rồi mà vẫn mua vì không thể đổi sản phẩm khác được. Chất lượng xứng đáng với giá tiền!", avatar: "💜", tag: "Dầu Gạo" },
+  { name: "Mẹ Khánh Vân", handle: "@khanvan_family", rating: 5, text: "Ship nhanh, đóng gói đẹp như quà tặng. Bác sĩ dinh dưỡng cũng gợi ý dùng MoaMoa luôn. 10 điểm!", avatar: "🧡", tag: "Dầu Bơ" },
+  { name: "Mẹ Thùy Vy", handle: "@thuyvy2baby", rating: 1, text: "Chất lượng thì không bàn cãi, nhưng chai dầu ăn 500ml mà bán 399k, tưởng tiền mọc trên cây hay gì á?", avatar: "💚", tag: "Dầu Gấc" },
+];
 
+const ExpertSection = () => {
   const [ref, vis] = useReveal(0.1);
 
   return (
@@ -1087,7 +1089,7 @@ const ExpertSection = () => {
 
         {/* Review cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1rem" }}>
-          {reviews.map((r, i) => {
+          {EXPERT_REVIEWS.map((r, i) => {
             const [rref, rvis] = useReveal(0.05);
             return (
               <div key={r.name} ref={rref} style={{
@@ -1516,31 +1518,6 @@ const QV_T = {
   body: "'Montserrat', 'Helvetica Neue', sans-serif",
 };
 
-const QV_STYLES_ID = "moamoa-qv-styles";
-
-function injectQuickViewStyles() {
-  if (document.getElementById(QV_STYLES_ID)) return;
-  const el = document.createElement("style");
-  el.id = QV_STYLES_ID;
-  el.textContent = `
-    @keyframes qv-overlay-in { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes qv-modal-in { from { opacity: 0; transform: translateY(28px) scale(0.975); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    @keyframes qv-overlay-out { from { opacity: 1; } to { opacity: 0; } }
-    @keyframes qv-modal-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(18px) scale(0.97); } }
-    @keyframes qv-shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
-    @keyframes qv-check-pop { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
-    @keyframes qv-badge-slide { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes qv-glow-pulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.06); } }
-    .qv-qty-btn:hover { background: #7A4326 !important; color: #fff !important; }
-    .qv-qty-btn:active { transform: scale(0.92) !important; }
-    .qv-cart-btn:hover { background: linear-gradient(135deg, #8B5230 0%, #C04A3B 100%) !important; box-shadow: 0 12px 36px rgba(122,67,38,0.45) !important; transform: translateY(-2px) !important; }
-    .qv-cart-btn:active { transform: translateY(0px) scale(0.98) !important; }
-    .qv-close-btn:hover { background: rgba(192,74,59,0.12) !important; color: #C04A3B !important; transform: rotate(90deg) !important; }
-    .qv-benefit-item { animation: qv-check-pop 0.4s cubic-bezier(.34,1.56,.64,1) both; }
-  `;
-  document.head.appendChild(el);
-}
-
 function QuantitySelector({ quantity, onChange }) {
   const btnBase = {
     width: "36px", height: "36px", borderRadius: "50%", border: `1.5px solid ${QV_T.lightBorder}`,
@@ -1579,7 +1556,6 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
     energy: "900 kcal", fat: "100g", vitE: "12mg", vitA: "—", omega: "Đa dạng"
   };
 
-  useEffect(() => { injectQuickViewStyles(); }, []);
   useEffect(() => { if (product) { setQuantity(1); setImgLoaded(false); } }, [product?.id]);
   useEffect(() => {
     clearTimeout(closeTimerRef.current);
@@ -1827,6 +1803,21 @@ export default function MoaMoa() {
         .footer-link:hover { color: #D4A373 !important; }
         .tag-link:hover { color: #D4A373 !important; border-color: rgba(212,163,115,0.3) !important; }
         .social-link:hover { background: #4A5D23 !important; transform: translateY(-2px); }
+
+        @keyframes qv-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes qv-modal-in { from { opacity: 0; transform: translateY(28px) scale(0.975); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes qv-overlay-out { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes qv-modal-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(18px) scale(0.97); } }
+        @keyframes qv-shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+        @keyframes qv-check-pop { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes qv-badge-slide { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes qv-glow-pulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.06); } }
+        .qv-qty-btn:hover { background: #7A4326 !important; color: #fff !important; }
+        .qv-qty-btn:active { transform: scale(0.92) !important; }
+        .qv-cart-btn:hover { background: linear-gradient(135deg, #8B5230 0%, #C04A3B 100%) !important; box-shadow: 0 12px 36px rgba(122,67,38,0.45) !important; transform: translateY(-2px) !important; }
+        .qv-cart-btn:active { transform: translateY(0px) scale(0.98) !important; }
+        .qv-close-btn:hover { background: rgba(192,74,59,0.12) !important; color: #C04A3B !important; transform: rotate(90deg) !important; }
+        .qv-benefit-item { animation: qv-check-pop 0.4s cubic-bezier(.34,1.56,.64,1) both; }
 
         @keyframes slideInRight {
           from { transform: translateX(24px); opacity: 0; }
