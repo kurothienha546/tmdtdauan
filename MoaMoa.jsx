@@ -733,7 +733,7 @@ function TextCard({ eyebrow, title, body, align = "left" }) {
 }
 
 const PHILOSOPHY_ROWS = [
-  { textLeft: true, eyebrow: "Nguyên liệu & Quy trình", title: "Từ nông trại đến bàn ăn an toàn", body: "Những vùng đất nông nghiệp truyền thống của Việt Nam giờ được nâng chuẩn VietGAP — không phân bón hóa học, không chất bảo quản. Từng hạt lanh, hạt óc chó, hạt gấc đều trải qua quy trình kiểm định nghiêm ngặt trước khi được ép lạnh 100%, giữ trọn enzyme sống và dưỡng chất quý từ thiên nhiên.", imgSrc: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80&auto=format&fit=crop", imgAlt: "Organic Vietnamese farm" },
+  { textLeft: true, eyebrow: "Nguyên liệu & Quy trình", title: "Từ nông trại đến bàn ăn an toàn", body: "Những vùng đất nông nghiệp truyền thống của Việt Nam giờ được nâng chuẩn VietGAP — không phân bón hóa học, không chất bảo quản. Từng hạt gạo, gấc, bơ, ô liu, mè đều trải qua quy trình kiểm định nghiêm ngặt trước khi được ép lạnh 100%, giữ trọn enzyme sống và dưỡng chất quý từ thiên nhiên.", imgSrc: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80&auto=format&fit=crop", imgAlt: "Organic Vietnamese farm" },
   { textLeft: false, eyebrow: "Tâm lý & Gắn kết", title: "Một hương vị, một cảm xúc", body: "Khoa học gắn kết cho thấy bữa ăn dặm không chỉ là dinh dưỡng — đó là khoảnh khắc hình thành cảm giác an toàn trong lòng bé. MoaMoa được tạo ra để trở thành người bạn đồng hành, giúp mỗi muỗng bột thêm thơm, mỗi bữa ăn thêm ấm, và mỗi khoảnh khắc cùng con trở nên thật sự đáng nhớ.", imgSrc: "https://vitadairy.vn/s/images/truyen-thong/Tin%20t%E1%BB%A9c/calokid.jpg", imgAlt: "Mother and baby bonding" },
 ];
 
@@ -835,10 +835,17 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
         <div style={{
           position: "absolute", top: 16, left: 16, zIndex: 5,
           background: `linear-gradient(135deg, ${C.brown} 0%, ${C.brownMid} 100%)`,
-          color: "white", borderRadius: 30, padding: "5px 14px",
-          fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.05em"
+          color: "white", borderRadius: 30, padding: "6px 15px",
+          fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.08em",
+          boxShadow: "0 0 0 2px rgba(255,255,255,0.55), 0 10px 24px rgba(122,67,38,0.32), 0 0 22px rgba(245,203,92,0.55)",
+          textShadow: "0 1px 2px rgba(0,0,0,0.22), 0 0 10px rgba(255,232,150,0.8)",
+          overflow: "hidden",
+          animation: "goldBadgePop 1.8s ease-in-out infinite",
         }}>
+          <span style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%)", transform: "translateX(-130%)", animation: "goldBadgeShine 2.4s ease-in-out infinite", pointerEvents: "none" }} />
+          <span style={{ position: "relative", zIndex: 1 }}>
           ⭐ CÔNG THỨC VÀNG
+          </span>
         </div>
       )}
 
@@ -1053,12 +1060,15 @@ const ExpertSection = () => {
           </div>
 
           <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
-            {/* Avatar */}
+            {/* Avatar Bác Sĩ */}
             <div style={{ flexShrink: 0, width: 70, height: 70, borderRadius: "50%",
-              background: `linear-gradient(135deg, ${C.olive}, ${C.oliveMid})`,
-              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem",
-              boxShadow: `0 8px 24px rgba(74,93,35,0.3)` }}>
-              👩‍⚕️
+              boxShadow: `0 8px 24px rgba(74,93,35,0.3)`, overflow: "hidden", 
+              border: `2px solid ${C.olivePale}` }}>
+              <img 
+                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop" 
+                alt="TS. BS. Nguyễn Thị Minh Ngọc" 
+                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+              />
             </div>
             <div style={{ flex: 1 }}>
               <blockquote style={{ fontFamily: "'Playfair Display', serif",
@@ -1084,7 +1094,7 @@ const ExpertSection = () => {
         {/* Reviews header */}
         <SectionTitle center
           eyebrow="Mẹ thông thái tin dùng"
-          title="Hơn 50,000 mẹ đã chọn MoaMoa"
+          title="Hơn 1000 mẹ đã chọn MoaMoa"
         />
 
         {/* Review cards */}
@@ -1827,6 +1837,16 @@ export default function MoaMoa() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes goldBadgePop {
+          0%, 100% { transform: scale(1); filter: saturate(1); }
+          50% { transform: scale(1.06); filter: saturate(1.35); }
+        }
+
+        @keyframes goldBadgeShine {
+          0%, 35% { transform: translateX(-130%); }
+          65%, 100% { transform: translateX(130%); }
         }
 
         @media (min-width: 769px) {
