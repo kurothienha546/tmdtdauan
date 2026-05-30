@@ -536,7 +536,7 @@ const BrandStory = () => {
         <div className="standard-grid" style={{ alignItems: "center" }}>
           <div>
             <SectionTitle
-              eyebrow="Từ Mộc Hoa đến MoaMoa"
+              eyebrow="Từ Mama đến MoaMoa"
               title={<>Tên thương hiệu mang<br /><em style={{ color: C.olive }}>tiếng hôn của mẹ</em></>}
             />
 
