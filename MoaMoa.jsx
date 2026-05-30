@@ -865,12 +865,28 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
         }} />
 
         <div style={{
-          width: "100%", display: "flex", justifyContent: "center", zIndex: 2,
+          width: "100%", height: "195px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2,
           transform: hov ? "scale(1.1) translateY(-6px)" : "scale(1)",
           filter: hov ? "drop-shadow(0 25px 30px rgba(122,67,38,0.25))" : "drop-shadow(0 10px 15px rgba(122,67,38,0.1))",
           transition: "all 0.4s cubic-bezier(0.34,1.56,0.64,1)"
         }}>
-          <img src={product.image} alt={product.name} style={{ width: "auto", height: "195px", objectFit: "contain" }} />
+          {product.images ? (
+            <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "flex-end", justifyContent: "center", scale: "0.95" }}>
+              <img
+                src={product.images[0]}
+                alt={`${product.name} - chai 1`}
+                style={{ height: "188px", width: "auto", maxWidth: "48%", objectFit: "contain", transform: "translateY(0) translateX(12px)", zIndex: 2, opacity: 1, transition: "all 0.4s", filter: "drop-shadow(0 18px 22px rgba(0,0,0,0.18))" }}
+              />
+              <span aria-hidden="true" style={{ position: "absolute", bottom: "35%", left: "50%", transform: "translate(-50%, 50%)", zIndex: 3, width: 28, height: 28, borderRadius: "50%", background: "rgba(255,255,255,0.9)", border: "1px solid rgba(122,67,38,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: C.brown, fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: "1rem", boxShadow: "0 8px 18px rgba(122,67,38,0.12)" }}>+</span>
+              <img
+                src={product.images[1]}
+                alt={`${product.name} - chai 2`}
+                style={{ height: "188px", width: "auto", maxWidth: "48%", objectFit: "contain", transform: "translateY(0) translateX(-12px)", zIndex: 1, opacity: 1, transition: "all 0.4s", filter: "drop-shadow(0 18px 22px rgba(0,0,0,0.18))" }}
+              />
+            </div>
+          ) : (
+            <img src={product.image} alt={product.name} style={{ width: "auto", height: "195px", objectFit: "contain" }} />
+          )}
         </div>
 
         <div style={{
@@ -967,9 +983,9 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
     { id: "sp_gao", name: "Dầu Gạo Rang Xay", category: "Dầu ăn dặm", image: "/daugao.png", tagline: "Từ gạo lứt Việt Nam, giàu Vitamin E và Oryzanol", bg: "#FDF8E8", benefits: ["Vitamin E", "Oryzanol", "Sterols"], price: 399000, stars: 4, reviews: 312, volume: "500ml" },
     { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", category: "Dầu ăn dặm", image: "/daubo.png", tagline: "Ép lạnh từ bơ sáp Tây Nguyên, giàu chất béo tốt", bg: "#EBF2E4", benefits: ["Healthy Fats", "Vitamin K", "Folate"], price: 399000, stars: 5, reviews: 156, volume: "500ml" },
     { id: "sp_me", name: "Dầu Mè Đen Ép Lạnh", category: "Dầu ăn dặm", image: "/daume.png", tagline: "Hương vị thơm ngon, kích thích bé ăn ngon miệng", bg: "#F2F0EB", benefits: ["Canxi", "Kẽm", "Omega-6"], price: 399000, stars: 4, reviews: 210, volume: "500ml", discount: 10, originalPrice: 443000 },
-    { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", image: "/daubo.png", tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
-    { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", image: "/daugac.png", tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
-    { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", image: "/daume.png", tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
+    { id: "combo_nao", name: "Combo Phát triển Trí não", category: "Combo khuyên dùng", images: ["/daubo.png", "/daugao.png"], tagline: "Dầu Bơ + Dầu Gạo - bộ đôi vàng cho phát triển não bộ", bg: "#EBF2E4", benefits: ["DHA hỗ trợ", "Healthy Fats", "Tổng hợp"], price: 700000, originalPrice: 798000, stars: 5, reviews: 427, volume: "2x500ml", featured: true, coreBenefit: "Phát triển não bộ" },
+    { id: "sp_combo_sangmat", name: "Combo Sáng Mắt", category: "Combo khuyên dùng", images: ["/daugac.png", "/dauolive.png"], tagline: "Gấc + Olive - hỗ trợ mắt và sức đề kháng", bg: "#FEF0EB", benefits: ["Beta-carotene", "Omega-9", "Hỗ trợ thị lực"], price: 700000, originalPrice: 798000, stars: 5, reviews: 381, volume: "2x500ml", featured: true },
+    { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", images: ["/daume.png", "/daubo.png"], tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
   ];
 
   return (
@@ -998,12 +1014,12 @@ const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) =>
 /* ─── EXPERT & SOCIAL PROOF ──────────────────────── */
 const ExpertSection = () => {
   const reviews = [
-    { name: "Mẹ Hà Linh", handle: "@halinhmom2024", rating: 5, text: "Con mình 8 tháng dùng dầu Gấc MoaMoa, da dẻ hồng hào hẳn! Mẹ nào chưa thử thì nên mua ngay á 🥰", avatar: "🧡", tag: "Dầu Gấc" },
-    { name: "Mẹ Thu Hương", handle: "@thuhuong_baby", rating: 5, text: "Mình là dietitian, sau khi xem thành phần mới tin dùng. Thật sự ấn tượng với chất lượng và nguồn gốc rõ ràng.", avatar: "💚", tag: "Dầu Olive" },
+    { name: "Mẹ Hải Băng", handle: "@haibang2024", rating: 5, text: "Con mình 8 tháng dùng dầu Gấc MoaMoa, da dẻ hồng hào hẳn! Mẹ nào chưa thử thì nên mua ngay á 🥰", avatar: "🧡", tag: "Dầu Gấc" },
+    { name: "Mẹ Khánh Nghi", handle: "@khanhnghi_baby", rating: 5, text: "Mình là dietitian, sau khi xem thành phần mới tin dùng. Thật sự ấn tượng với chất lượng và nguồn gốc rõ ràng.", avatar: "💚", tag: "Dầu Olive" },
     { name: "Mẹ Ngọc Anh", handle: "@ngocanhkitchen", rating: 5, text: "Combo não bộ thay đổi hoàn toàn cách nấu dặm của mình! Bé nhà ăn ngon hơn hẳn, không còn lười ăn nữa 😭❤️", avatar: "💛", tag: "Combo Trí não" },
     { name: "Mẹ Phương Thảo", handle: "@phuongthao_mom", rating: 5, text: "Voucher hết rồi mà vẫn mua vì không thể đổi sản phẩm khác được. Chất lượng xứng đáng với giá tiền!", avatar: "💜", tag: "Dầu Gạo" },
     { name: "Mẹ Khánh Vân", handle: "@khanvan_family", rating: 5, text: "Ship nhanh, đóng gói đẹp như quà tặng. Bác sĩ dinh dưỡng cũng gợi ý dùng MoaMoa luôn. 10 điểm!", avatar: "🧡", tag: "Dầu Bơ" },
-    { name: "Mẹ Minh Tâm", handle: "@minhtam2baby", rating: 4, text: "Đã dùng 3 tháng, thấy con phát triển tốt. Sản phẩm sạch, yên tâm cho bé 6 tháng trở lên. Recommend!", avatar: "💚", tag: "Dầu Gấc" },
+    { name: "Mẹ Thùy Vy", handle: "@thuyvy2baby", rating: 1, text: "Chất lượng thì không bàn cãi, nhưng chai dầu ăn 500ml mà bán 399k, tưởng tiền mọc trên cây hay gì á?", avatar: "💚", tag: "Dầu Gấc" },
   ];
 
   const [ref, vis] = useReveal(0.1);
@@ -1360,11 +1376,26 @@ const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, 
                 key={item.id || item.name}
                 style={{ background: "white", borderRadius: 18, border: `1px solid ${C.border}`, padding: "0.9rem", display: "flex", gap: "0.75rem", alignItems: "center" }}
               >
-                <img
-                  src={item.image || "/daugac.png"}
-                  alt={item.name}
-                  style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 12, background: C.creamDark }}
-                />
+                {item.images ? (
+                  <div style={{ position: "relative", width: 56, height: 56, flexShrink: 0, display: "flex", alignItems: "flex-end", justifyContent: "center", borderRadius: 12, background: C.creamDark, overflow: "hidden" }}>
+                    <img
+                      src={item.images[0]}
+                      alt={`${item.name} - chai 1`}
+                      style={{ width: 28, height: 52, objectFit: "contain", transform: "translateX(6px)", zIndex: 2 }}
+                    />
+                    <img
+                      src={item.images[1]}
+                      alt={`${item.name} - chai 2`}
+                      style={{ width: 25, height: 46, objectFit: "contain", transform: "translateX(-6px)", zIndex: 1 }}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={item.image || "/daugac.png"}
+                    alt={item.name}
+                    style={{ width: 56, height: 56, objectFit: "contain", borderRadius: 12, background: C.creamDark }}
+                  />
+                )}
                 <div style={{ flex: 1 }}>
                   <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.82rem", fontWeight: 700, color: C.charcoal }}>
                     {item.name || `Dầu ${item.label}`}
@@ -1594,11 +1625,28 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 55%, rgba(255,255,255,0.30) 0%, transparent 70%)`, pointerEvents: "none" }} />
           <div style={{ position: "absolute", width: "220px", height: "220px", borderRadius: "50%", background: `radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 70%)`, animation: "qv-glow-pulse 3.5s ease-in-out infinite", pointerEvents: "none" }} />
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(122,67,38,0.06) 1px, transparent 1px)", backgroundSize: "22px 22px", pointerEvents: "none" }} />
-          <img
-            src={product.image} alt={product.name}
-            onLoad={() => setImgLoaded(true)}
-            style={{ position: "relative", zIndex: 1, maxWidth: "240px", maxHeight: "280px", width: "100%", objectFit: "contain", opacity: imgLoaded ? 1 : 0, transform: imgLoaded ? "scale(1)" : "scale(0.92)", transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1)", filter: "drop-shadow(0 16px 32px rgba(45,27,18,0.22))" }}
-          />
+          {product.images ? (
+            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "280px", display: "flex", alignItems: "flex-end", justifyContent: "center", opacity: imgLoaded ? 1 : 0, transform: imgLoaded ? "scale(1.2)" : "scale(1.2)", transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1)", zIndex: 1 }}>
+              <img
+                src={product.images[0]}
+                alt={`${product.name} - chai 1`}
+                onLoad={() => setImgLoaded(true)}
+                style={{ maxHeight: "280px", width: "auto", maxWidth: "48%", objectFit: "contain", transform: "translateY(-80%) translateX(20px)", zIndex: 2, opacity: imgLoaded ? 1 : 0, transition: "opacity 0.55s ease", filter: "drop-shadow(0 18px 28px rgba(45,27,18,0.22))" }}
+              />
+              <span aria-hidden="true" style={{ position: "absolute", bottom: "55%", left: "50%", transform: "translate(-50%, 50%)", zIndex: 3, width: 38, height: 38, borderRadius: "50%", background: "rgba(255,255,255,0.95)", border: "1px solid rgba(122,67,38,0.18)", display: "flex", alignItems: "center", justifyContent: "center", color: QV_T.primary, fontFamily: QV_T.body, fontWeight: 800, fontSize: "1.25rem", boxShadow: "0 10px 24px rgba(122,67,38,0.14)" }}>+</span>
+              <img
+                src={product.images[1]}
+                alt={`${product.name} - chai 2`}
+                style={{ maxHeight: "280px", width: "auto", maxWidth: "48%", objectFit: "contain", transform: "translateY(-80%) translateX(-20px)", zIndex: 1, opacity: imgLoaded ? 1 : 0, transition: "opacity 0.55s ease", filter: "drop-shadow(0 18px 28px rgba(45,27,18,0.22))" }}
+              />
+            </div>
+          ) : (
+            <img
+              src={product.image} alt={product.name}
+              onLoad={() => setImgLoaded(true)}
+              style={{ position: "relative", zIndex: 1, maxWidth: "240px", maxHeight: "280px", width: "100%", objectFit: "contain", opacity: imgLoaded ? 1 : 0, transform: imgLoaded ? "scale(1)" : "scale(0.92)", transition: "opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.2,0.64,1)", filter: "drop-shadow(0 16px 32px rgba(45,27,18,0.22))" }}
+            />
+          )}
           {!imgLoaded && <div style={{ position: "absolute", width: "180px", height: "220px", borderRadius: "16px", background: "linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.2) 100%)", backgroundSize: "400px 100%", animation: "qv-shimmer 1.4s linear infinite", zIndex: 1 }} />}
           {product.originalPrice && (
             <div style={{ position: "absolute", top: "16px", left: "16px", background: QV_T.terra, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.5px", borderRadius: "20px", padding: "5px 12px", boxShadow: "0 4px 12px rgba(192,74,59,0.4)", animation: "qv-badge-slide 0.5s ease 0.3s both" }}>
@@ -1801,8 +1849,8 @@ export default function MoaMoa() {
         }
 
         @keyframes bounce {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(6px); }
+          0%, 100% { transform-origin: center center; transform: translateX(-50%) translateY(0); }
+          50% { transform-origin: center center; transform: translateX(-50%) translateY(6px); }
         }
       `}</style>
 
