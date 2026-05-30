@@ -278,11 +278,11 @@ const Navbar = ({ cartCount = 0, onNavigate = () => { }, onOpenCart = () => { },
 
 /* ─── CẬP NHẬT HERO COMPONENT ────────────────────── */
 const HERO_PRODUCTS = [
-  { id: "sp_gac",   name: "Dầu Gấc MoaMoa",        label: "Gấc",  image: "/daugac.png", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
-  { id: "sp_olive", name: "Dầu Olive Extra Virgin",  label: "Olive",image: "/dauolive.png", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
-  { id: "sp_gao",   name: "Dầu Gạo Rang Xay",       label: "Gạo",  image: "/daugao.png", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
-  { id: "sp_bo",    name: "Dầu Bơ Hữu Cơ",          label: "Bơ",   image: "/daubo.png", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
-  { id: "sp_me",    name: "Dầu Mè Trắng Ép Lạnh",     label: "Mè",   image: "/daume.png", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_gac", name: "Dầu Gấc MoaMoa", label: "Gấc", image: "/daugac.png", color: "#E05A3D", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_olive", name: "Dầu Olive Extra Virgin", label: "Olive", image: "/dauolive.png", color: "#708C3A", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_gao", name: "Dầu Gạo Rang Xay", label: "Gạo", image: "/daugao.png", color: "#D4A373", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_bo", name: "Dầu Bơ Hữu Cơ", label: "Bơ", image: "/daubo.png", color: "#4A7C2F", price: 399000, originalPrice: 450000, discount: 11 },
+  { id: "sp_me", name: "Dầu Mè Trắng Ép Lạnh", label: "Mè", image: "/daume.png", color: "#2D2D2D", price: 399000, originalPrice: 450000, discount: 11 },
 ];
 
 const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
@@ -475,7 +475,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
               <button key={i} onClick={() => setActiveIndex(i)} style={{ width: activeIndex === i ? 22 : 12, height: activeIndex === i ? 22 : 12, borderRadius: "50%", background: p.color, border: activeIndex === i ? `3px solid white` : "2px solid transparent", boxShadow: activeIndex === i ? `0 0 0 2px ${p.color}, 0 6px 12px rgba(0,0,0,0.15)` : "0 4px 8px rgba(0,0,0,0.1)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.25, 1, 0.5, 1)" }} title={p.label} />
             ))}
           </div>
-        </div>  
+        </div>
       </div>
 
       <div style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, animation: "bounce 2s ease-in-out infinite", opacity: 0.6, cursor: "pointer" }}>
@@ -777,7 +777,7 @@ function TimelineStep({ step, index, total }) {
   );
 }
 
-function JourneyTimeline({ onNavigate = () => {} }) {
+function JourneyTimeline({ onNavigate = () => { } }) {
   return (
     <section style={{ padding: "80px 24px 104px", background: `linear-gradient(175deg, ${T.bg} 0%, #EFE4D5 100%)`, position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", top: "-120px", right: "-120px", width: "480px", height: "480px", borderRadius: "50%", background: "rgba(122,67,38,0.05)", pointerEvents: "none" }} />
@@ -794,7 +794,7 @@ function JourneyTimeline({ onNavigate = () => {} }) {
   );
 }
 
-const StoryPage = ({ onNavigate = () => {} }) => {
+const StoryPage = ({ onNavigate = () => { } }) => {
   return (
     <main style={{ background: T.bg, minHeight: "100vh", fontFamily: T.bodyFont, color: T.dark, overflowX: "hidden" }}>
       <HeroBanner />
@@ -805,7 +805,7 @@ const StoryPage = ({ onNavigate = () => {} }) => {
 };
 
 /* ─── PRODUCT CARD ───────────────────────────────── */
-const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }, onQuickView = () => {} }) => {
+const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }, onQuickView = () => { } }) => {
   const [hov, setHov] = useState(false);
   const [ref, vis] = useReveal(0.1);
 
@@ -834,17 +834,24 @@ const ProductCard = ({ product, index, featured = false, onAddToCart = () => { }
       {featured && (
         <div style={{
           position: "absolute", top: 16, left: 16, zIndex: 5,
-          background: `linear-gradient(135deg, ${C.brown} 0%, ${C.brownMid} 100%)`,
-          color: "white", borderRadius: 30, padding: "6px 15px",
-          fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.08em",
-          boxShadow: "0 0 0 2px rgba(255,255,255,0.55), 0 10px 24px rgba(122,67,38,0.32), 0 0 22px rgba(245,203,92,0.55)",
-          textShadow: "0 1px 2px rgba(0,0,0,0.22), 0 0 10px rgba(255,232,150,0.8)",
+          background: "linear-gradient(135deg, #4A2E1B 0%, #23120A 100%)", /* Nâu trầm espresso */
+          color: "#E2C073", /* Vàng gold metallic, tuyệt đối không dùng pure yellow */
+          borderRadius: 30, padding: "5px 14px",
+          border: "1px solid rgba(226, 192, 115, 0.25)", /* Viền vàng gold mỏng, mờ */
+          fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.15)", /* Đổ bóng sâu, êm, không chói */
           overflow: "hidden",
-          animation: "goldBadgePop 1.8s ease-in-out infinite",
+          /* Đã gỡ bỏ animation "pop" giật cục để giữ sự thanh lịch */
         }}>
-          <span style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 45%, transparent 70%)", transform: "translateX(-130%)", animation: "goldBadgeShine 2.4s ease-in-out infinite", pointerEvents: "none" }} />
-          <span style={{ position: "relative", zIndex: 1 }}>
-          ⭐ CÔNG THỨC VÀNG
+          <span style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(120deg, transparent 0%, rgba(226, 192, 115, 0.25) 45%, transparent 70%)",
+            transform: "translateX(-130%)",
+            animation: "goldBadgeShine 3s ease-in-out infinite", /* Kéo giãn thời gian chạy vệt sáng ra 3s cho mượt */
+            pointerEvents: "none"
+          }} />
+          <span style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: "4px" }}>
+            <span style={{ fontSize: "0.75rem" }}>✨</span> CÔNG THỨC VÀNG
           </span>
         </div>
       )}
@@ -995,7 +1002,7 @@ const SHOP_PRODUCTS = [
   { id: "sp_combo_tieuhoa", name: "Combo Tiêu Hóa", category: "Combo khuyên dùng", images: ["/daume.png", "/daubo.png"], tagline: "Mè + Bơ - dầu thơm hỗ trợ tiêu hóa và cân bằng", bg: "#F2F0EB", benefits: ["Omega-6", "Healthy Fats", "Tiêu hóa"], price: 700000, originalPrice: 798000, stars: 4, reviews: 354, volume: "2x500ml", featured: true },
 ];
 
-const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => {} }) => {
+const ProductsSection = ({ onAddToCart = () => { }, onQuickView = () => { } }) => {
 
   return (
     <section id="collection-section" style={{ background: C.creamDark, padding: "7rem 1.5rem" }}>
@@ -1054,37 +1061,47 @@ const ExpertSection = () => {
           transition: "all 0.8s ease",
         }}>
           {/* Quote mark */}
-          <div style={{ position: "absolute", top: -10, left: 24, fontFamily: "serif",
-            fontSize: "8rem", color: C.olive, opacity: 0.08, lineHeight: 1, userSelect: "none" }}>
+          <div style={{
+            position: "absolute", top: -10, left: 24, fontFamily: "serif",
+            fontSize: "8rem", color: C.olive, opacity: 0.08, lineHeight: 1, userSelect: "none"
+          }}>
             "
           </div>
 
           <div style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start", position: "relative", zIndex: 1 }}>
             {/* Avatar Bác Sĩ */}
-            <div style={{ flexShrink: 0, width: 70, height: 70, borderRadius: "50%",
-              boxShadow: `0 8px 24px rgba(74,93,35,0.3)`, overflow: "hidden", 
-              border: `2px solid ${C.olivePale}` }}>
-              <img 
-                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop" 
-                alt="TS. BS. Nguyễn Thị Minh Ngọc" 
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+            <div style={{
+              flexShrink: 0, width: 70, height: 70, borderRadius: "50%",
+              boxShadow: `0 8px 24px rgba(74,93,35,0.3)`, overflow: "hidden",
+              border: `2px solid ${C.olivePale}`
+            }}>
+              <img
+                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop"
+                alt="TS. BS. Nguyễn Thị Minh Ngọc"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </div>
             <div style={{ flex: 1 }}>
-              <blockquote style={{ fontFamily: "'Playfair Display', serif",
+              <blockquote style={{
+                fontFamily: "'Playfair Display', serif",
                 fontSize: "1.05rem", fontStyle: "italic", color: C.charcoal,
-                lineHeight: 1.8, marginBottom: "1.25rem", margin: "0 0 1.25rem" }}>
+                lineHeight: 1.8, marginBottom: "1.25rem", margin: "0 0 1.25rem"
+              }}>
                 "Dầu ăn dặm đóng vai trò then chốt trong 1000 ngày đầu đời. Tôi đặc biệt đánh giá cao MoaMoa ở khả năng bảo toàn axit béo thiết yếu qua công nghệ ép lạnh — điều hiếm thấy ở thị trường Việt Nam."
               </blockquote>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div>
-                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
-                    fontSize: "0.85rem", color: C.charcoal }}>TS. BS. Nguyễn Thị Minh Ngọc</div>
-                  <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem",
-                    color: C.olive }}>Chuyên gia Dinh dưỡng Nhi khoa · BV Nhi Trung ương</div>
+                  <div style={{
+                    fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
+                    fontSize: "0.85rem", color: C.charcoal
+                  }}>TS. BS. Nguyễn Thị Minh Ngọc</div>
+                  <div style={{
+                    fontFamily: "'Montserrat', sans-serif", fontSize: "0.72rem",
+                    color: C.olive
+                  }}>Chuyên gia Dinh dưỡng Nhi khoa · BV Nhi Trung ương</div>
                 </div>
                 <div style={{ marginLeft: "auto", display: "flex", gap: 3 }}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={13} fill="#F5CB5C" color="#F5CB5C" strokeWidth={0} />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={13} fill="#F5CB5C" color="#F5CB5C" strokeWidth={0} />)}
                 </div>
               </div>
             </div>
@@ -1111,37 +1128,49 @@ const ExpertSection = () => {
                 transition: `all 0.6s ease ${i * 0.07}s`,
               }}>
                 {/* Tag */}
-                <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 20,
+                <span style={{
+                  display: "inline-block", padding: "2px 10px", borderRadius: 20,
                   background: C.terraPale, border: `1px solid rgba(192,74,59,0.2)`,
                   fontFamily: "'Montserrat', sans-serif", fontSize: "0.6rem",
-                  color: C.terra, fontWeight: 700, marginBottom: 10 }}>
+                  color: C.terra, fontWeight: 700, marginBottom: 10
+                }}>
                   {r.tag}
                 </span>
                 {/* Stars */}
                 <div style={{ display: "flex", gap: 2, marginBottom: 8 }}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={11} fill={s <= r.rating ? "#F5CB5C" : "transparent"}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={11} fill={s <= r.rating ? "#F5CB5C" : "transparent"}
                     color={s <= r.rating ? "#F5CB5C" : C.border} strokeWidth={1.5} />)}
                 </div>
-                <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem",
-                  color: C.muted, lineHeight: 1.65, marginBottom: "1rem" }}>
+                <p style={{
+                  fontFamily: "'Montserrat', sans-serif", fontSize: "0.8rem",
+                  color: C.muted, lineHeight: 1.65, marginBottom: "1rem"
+                }}>
                   {r.text}
                 </p>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 34, height: 34, borderRadius: "50%",
+                  <div style={{
+                    width: 34, height: 34, borderRadius: "50%",
                     background: C.olivePale, display: "flex", alignItems: "center",
-                    justifyContent: "center", fontSize: "1rem" }}>
+                    justifyContent: "center", fontSize: "1rem"
+                  }}>
                     {r.avatar}
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.78rem",
-                      fontWeight: 700, color: C.charcoal }}>{r.name}</div>
-                    <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem",
-                      color: C.olive }}>{r.handle}</div>
+                    <div style={{
+                      fontFamily: "'Montserrat', sans-serif", fontSize: "0.78rem",
+                      fontWeight: 700, color: C.charcoal
+                    }}>{r.name}</div>
+                    <div style={{
+                      fontFamily: "'Montserrat', sans-serif", fontSize: "0.65rem",
+                      color: C.olive
+                    }}>{r.handle}</div>
                   </div>
-                  <div style={{ marginLeft: "auto", padding: "2px 8px", borderRadius: 8,
+                  <div style={{
+                    marginLeft: "auto", padding: "2px 8px", borderRadius: 8,
                     background: "rgba(74,93,35,0.08)",
                     fontFamily: "'Montserrat', sans-serif", fontSize: "0.58rem",
-                    color: C.olive, fontWeight: 600 }}>✓ Đã mua</div>
+                    color: C.olive, fontWeight: 600
+                  }}>✓ Đã mua</div>
                 </div>
               </div>
             );
@@ -1346,7 +1375,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 };
 
 /* ─── SLIDE CART ───────────────────────────────── */
-const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => {}, onIncreaseQty = () => {}, onRemoveItem = () => {} }) => {
+const SlideCart = ({ isOpen, onClose, cartItems = [], onDecreaseQty = () => { }, onIncreaseQty = () => { }, onRemoveItem = () => { } }) => {
   const [checkoutHov, setCheckoutHov] = useState(false);
 
   if (!isOpen) return null;
@@ -1553,14 +1582,14 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
 
   // Per-product nutritional data (keyed by product id)
   const nutritionMap = {
-    sp_gac:          { energy: "900 kcal", fat: "100g", vitE: "28mg", vitA: "620µg", omega: "Omega-6: 36%" },
-    sp_olive:        { energy: "884 kcal", fat: "100g", vitE: "14mg", vitA: "—",     omega: "Omega-9: 73%" },
-    sp_gao:          { energy: "900 kcal", fat: "100g", vitE: "32mg", vitA: "—",     omega: "Omega-6: 38%" },
-    sp_bo:           { energy: "884 kcal", fat: "100g", vitE: "13mg", vitA: "—",     omega: "Omega-9: 63%" },
-    sp_me:           { energy: "898 kcal", fat: "100g", vitE: "1.4mg", vitA: "—",     omega: "Omega-6: 42%" },
-    combo_nao:       { energy: "892 kcal", fat: "100g", vitE: "22mg", vitA: "—",     omega: "Hỗn hợp DHA" },
+    sp_gac: { energy: "900 kcal", fat: "100g", vitE: "28mg", vitA: "620µg", omega: "Omega-6: 36%" },
+    sp_olive: { energy: "884 kcal", fat: "100g", vitE: "14mg", vitA: "—", omega: "Omega-9: 73%" },
+    sp_gao: { energy: "900 kcal", fat: "100g", vitE: "32mg", vitA: "—", omega: "Omega-6: 38%" },
+    sp_bo: { energy: "884 kcal", fat: "100g", vitE: "13mg", vitA: "—", omega: "Omega-9: 63%" },
+    sp_me: { energy: "898 kcal", fat: "100g", vitE: "1.4mg", vitA: "—", omega: "Omega-6: 42%" },
+    combo_nao: { energy: "892 kcal", fat: "100g", vitE: "22mg", vitA: "—", omega: "Hỗn hợp DHA" },
     combo_toan_dien: { energy: "892 kcal", fat: "100g", vitE: "21mg", vitA: "310µg", omega: "Omega-9+6" },
-    combo_de_khang:  { energy: "899 kcal", fat: "100g", vitE: "16mg", vitA: "—",     omega: "Omega-6: 40%" },
+    combo_de_khang: { energy: "899 kcal", fat: "100g", vitE: "16mg", vitA: "—", omega: "Omega-6: 40%" },
   };
   const nutrition = nutritionMap[product?.id] || {
     energy: "900 kcal", fat: "100g", vitE: "12mg", vitA: "—", omega: "Đa dạng"
@@ -1587,13 +1616,13 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
 
   const isVisible = animState === "open";
   const overlayAnim = isVisible ? "qv-overlay-in 0.28s ease forwards" : "qv-overlay-out 0.30s ease forwards";
-  const modalAnim  = isVisible ? "qv-modal-in 0.38s cubic-bezier(0.22,1,0.36,1) forwards" : "qv-modal-out 0.28s ease forwards";
+  const modalAnim = isVisible ? "qv-modal-in 0.38s cubic-bezier(0.22,1,0.36,1) forwards" : "qv-modal-out 0.28s ease forwards";
 
   const nutritionRows = [
-    { label: "Năng lượng",     value: nutrition.energy },
-    { label: "Chất béo tổng",  value: nutrition.fat },
-    { label: "Vitamin E",      value: nutrition.vitE },
-    { label: "Vitamin A",      value: nutrition.vitA },
+    { label: "Năng lượng", value: nutrition.energy },
+    { label: "Chất béo tổng", value: nutrition.fat },
+    { label: "Vitamin E", value: nutrition.vitE },
+    { label: "Vitamin A", value: nutrition.vitA },
     { label: "Axit béo chính", value: nutrition.omega },
   ];
 
@@ -1638,7 +1667,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
             <div style={{ position: "absolute", top: "16px", left: "16px", background: QV_T.terra, color: QV_T.white, fontFamily: QV_T.body, fontWeight: 700, fontSize: "0.7rem", letterSpacing: "0.5px", borderRadius: "20px", padding: "5px 12px", boxShadow: "0 4px 12px rgba(192,74,59,0.4)", animation: "qv-badge-slide 0.5s ease 0.3s both" }}>
               {(() => {
                 const original = parseInt(String(product.originalPrice).replace(/\D/g, ""), 10);
-                const current  = parseInt(String(product.price).replace(/\D/g, ""), 10);
+                const current = parseInt(String(product.price).replace(/\D/g, ""), 10);
                 return Number.isFinite(original) && Number.isFinite(current) && original > 0
                   ? Math.round(((original - current) / original) * 100) : 0;
               })()}% OFF
