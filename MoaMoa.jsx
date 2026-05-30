@@ -356,6 +356,24 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           background: rgba(255,255,255,0.9) !important;
           box-shadow: 0 6px 16px rgba(122,67,38,0.08);
         }
+        .hero-right-col {
+          position: relative;
+          width: 100%;
+          height: 360px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-dots {
+          position: absolute;
+          right: 5%;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          z-index: 10;
+        }
         .product-visual-group {
           position: relative;
           height: 90%;
@@ -374,6 +392,12 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           transform: translateY(0) translateX(0);
         }
         @media (min-width: 769px) {
+          .hero-right-col {
+            height: 500px;
+          }
+          .hero-dots {
+            right: 25%;
+          }
           .product-visual-group {
             height: 115%;
             transform: translateY(95px) translateX(15px);
@@ -453,7 +477,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
         </div>
 
         {/* RIGHT COL */}
-        <div style={{ position: "relative", height: 500, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(24px)", transition: "all 1s ease 0.4s" }}>
+        <div className="hero-right-col" style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(24px)", transition: "all 1s ease 0.4s" }}>
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 340, height: 340, borderRadius: "50%", background: "radial-gradient(circle, rgba(122,67,38,0.08) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
           <div style={{ position: "relative", width: "100%", height: "100%", zIndex: 1 }}>
@@ -470,7 +494,7 @@ const Hero = ({ onAddToCart = () => { }, onNavigate = () => { } }) => {
           </div>
 
           {/* Dot nav */}
-          <div style={{ position: "absolute", right: "25%", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "1rem", zIndex: 10 }}>
+          <div className="hero-dots">
             {HERO_PRODUCTS.map((p, i) => (
               <button key={i} onClick={() => setActiveIndex(i)} style={{ width: activeIndex === i ? 22 : 12, height: activeIndex === i ? 22 : 12, borderRadius: "50%", background: p.color, border: activeIndex === i ? `3px solid white` : "2px solid transparent", boxShadow: activeIndex === i ? `0 0 0 2px ${p.color}, 0 6px 12px rgba(0,0,0,0.15)` : "0 4px 8px rgba(0,0,0,0.1)", cursor: "pointer", transition: "all 0.3s cubic-bezier(0.25, 1, 0.5, 1)" }} title={p.label} />
             ))}
@@ -1633,10 +1657,10 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
       role="dialog" aria-modal="true" aria-label={`Quick view: ${product.name}`}
       style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.42)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", animation: overlayAnim }}
     >
-      <div id="moamoa-qv-grid" style={{ width: "100%", maxWidth: "850px", maxHeight: "calc(100vh - 32px)", background: `linear-gradient(145deg, ${QV_T.white} 0%, ${QV_T.cream} 100%)`, borderRadius: "24px", boxShadow: "0 32px 80px rgba(45,27,18,0.22), 0 8px 24px rgba(45,27,18,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", border: "1px solid rgba(255,255,255,0.75)", overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", animation: modalAnim, position: "relative" }}>
+      <div id="moamoa-qv-grid" style={{ width: "100%", maxWidth: "850px", maxHeight: "calc(100vh - 32px)", background: `linear-gradient(145deg, ${QV_T.white} 0%, ${QV_T.cream} 100%)`, borderRadius: "24px", boxShadow: "0 32px 80px rgba(45,27,18,0.22), 0 8px 24px rgba(45,27,18,0.10), inset 0 1px 0 rgba(255,255,255,0.9)", border: "1px solid rgba(255,255,255,0.75)", overflowY: "auto", overflowX: "hidden", WebkitOverflowScrolling: "touch", display: "grid", gridTemplateColumns: "1fr 1fr", animation: modalAnim, position: "relative" }}>
 
         {/* LEFT: product image */}
-        <div style={{ background: product.bg || "#EFE4D5", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 32px", overflow: "hidden", minHeight: "360px" }}>
+        <div className="qv-left-col" style={{ background: product.bg || "#EFE4D5", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 32px", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 55%, rgba(255,255,255,0.30) 0%, transparent 70%)`, pointerEvents: "none" }} />
           <div style={{ position: "absolute", width: "220px", height: "220px", borderRadius: "50%", background: `radial-gradient(circle, rgba(255,255,255,0.55) 0%, transparent 70%)`, animation: "qv-glow-pulse 3.5s ease-in-out infinite", pointerEvents: "none" }} />
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(122,67,38,0.06) 1px, transparent 1px)", backgroundSize: "22px 22px", pointerEvents: "none" }} />
@@ -1676,7 +1700,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
         </div>
 
         {/* RIGHT: details */}
-        <div style={{ padding: "32px 32px 32px 28px", display: "flex", flexDirection: "column", gap: "0px", overflowY: "auto", position: "relative", maxHeight: "calc(100vh - 32px)" }}>
+        <div style={{ padding: "32px 32px 32px 28px", display: "flex", flexDirection: "column", gap: "0px", position: "relative" }}>
           <button className="qv-close-btn" onClick={onClose} aria-label="Close" style={{ position: "absolute", top: "16px", right: "16px", width: "36px", height: "36px", borderRadius: "50%", border: `1.5px solid ${QV_T.lightBorder}`, background: "rgba(240,232,220,0.6)", color: QV_T.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "background 0.2s ease, color 0.2s ease, transform 0.3s ease", outline: "none", flexShrink: 0, zIndex: 2 }}>
             <X size={16} strokeWidth={2.5} />
           </button>
@@ -1763,8 +1787,6 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
             </div>
           </div>
         </div>
-
-        <style>{`@media (max-width: 620px) { #moamoa-qv-grid { grid-template-columns: 1fr !important; } }`}</style>
       </div>
     </div>
   );
@@ -1857,6 +1879,11 @@ export default function MoaMoa() {
         .qv-cart-btn:active { transform: translateY(0px) scale(0.98) !important; }
         .qv-close-btn:hover { background: rgba(192,74,59,0.12) !important; color: #C04A3B !important; transform: rotate(90deg) !important; }
         .qv-benefit-item { animation: qv-check-pop 0.4s cubic-bezier(.34,1.56,.64,1) both; }
+        .qv-left-col { min-height: 360px; }
+        @media (max-width: 620px) {
+          #moamoa-qv-grid { grid-template-columns: 1fr !important; }
+          .qv-left-col { min-height: 250px !important; padding: 24px 16px !important; }
+        }
 
         @keyframes slideInRight {
           from { transform: translateX(24px); opacity: 0; }
